@@ -14,10 +14,10 @@
                     line-height: 18px;
                 "
             >
-                Kleinkram
+                TsingtaoAI
             </span>
             <span style="font-size: 10px; line-height: 12px"
-                >by Robotic Systems Lab</span
+                >for Robotic Systems</span
             >
         </div>
     </div>

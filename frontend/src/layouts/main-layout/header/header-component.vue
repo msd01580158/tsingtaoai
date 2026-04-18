@@ -35,13 +35,13 @@ const $router = useRouter();
 
 const mainMenu: MainMenu[] = [
     {
-        title: 'Dashboard',
+        title: '仪表盘',
         icon: 'sym_o_dashboard',
         to: ROUTES.DASHBOARD.path,
         subpageNames: [],
     },
     {
-        title: 'Projects',
+        title: '项目管理',
         icon: 'sym_o_box',
         to: ROUTES.PROJECTS.path,
         subpageNames: [
@@ -51,19 +51,19 @@ const mainMenu: MainMenu[] = [
         ],
     },
     {
-        title: 'Datatable',
+        title: '数据表',
         icon: 'sym_o_database',
         to: ROUTES.DATATABLE.path,
         subpageNames: [],
     },
     {
-        title: 'Actions',
+        title: '任务队列',
         icon: 'sym_o_analytics',
         to: '/actions',
         subpageNames: [ROUTES.ANALYSIS_DETAILS.name, ROUTES.ACTION.name],
     },
     {
-        title: 'Access Control',
+        title: '权限控制',
         icon: 'sym_o_lock',
         to: ROUTES.ACCESS_GROUPS.path,
         subpageNames: [ROUTES.ACCESS_GROUP.name],

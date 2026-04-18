@@ -1,0 +1,225 @@
+{
+  "id": "2026-04-18-210118",
+  "generated_at": "2026-04-18T13:01:18.132435387Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-lan",
+      "title": "项目概览",
+      "file": "1-xiang-mu-gai-lan.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-kai-shi",
+      "title": "快速开始",
+      "file": "2-kuai-su-kai-shi.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-he-xin-gai-nian-yu-shu-ju-ceng-ji",
+      "title": "核心概念与数据层级",
+      "file": "3-he-xin-gai-nian-yu-shu-ju-ceng-ji.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-cli-an-zhuang-yu-pei-zhi",
+      "title": "CLI 安装与配置",
+      "file": "4-cli-an-zhuang-yu-pei-zhi.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "5-kai-fa-huan-jing-da-jian",
+      "title": "开发环境搭建",
+      "file": "5-kai-fa-huan-jing-da-jian.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "6-xi-tong-jia-gou-yu-fu-wu-bian-pai",
+      "title": "系统架构与服务编排",
+      "file": "6-xi-tong-jia-gou-yu-fu-wu-bian-pai.md",
+      "section": "深入理解",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-api-duan-dian-yu-kong-zhi-qi-she-ji",
+      "title": "API 端点与控制器设计",
+      "file": "7-api-duan-dian-yu-kong-zhi-qi-she-ji.md",
+      "section": "深入理解",
+      "group": "后端开发",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "8-shu-ju-mo-xing-yu-typeorm-shi-ti",
+      "title": "数据模型与 TypeORM 实体",
+      "file": "8-shu-ju-mo-xing-yu-typeorm-shi-ti.md",
+      "section": "深入理解",
+      "group": "后端开发",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "9-fu-wu-ceng-yu-ye-wu-luo-ji",
+      "title": "服务层与业务逻辑",
+      "file": "9-fu-wu-ceng-yu-ye-wu-luo-ji.md",
+      "section": "深入理解",
+      "group": "后端开发",
+      "level": "Advanced"
+    },
+    {
+      "slug": "10-vue-zu-jian-jia-gou",
+      "title": "Vue 组件架构",
+      "file": "10-vue-zu-jian-jia-gou.md",
+      "section": "深入理解",
+      "group": "前端开发",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "11-zhuang-tai-guan-li-yu-lu-you-xi-tong",
+      "title": "状态管理与路由系统",
+      "file": "11-zhuang-tai-guan-li-yu-lu-you-xi-tong.md",
+      "section": "深入理解",
+      "group": "前端开发",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-actions-ji-chu-yu-shi-yong",
+      "title": "Actions 基础与使用",
+      "file": "12-actions-ji-chu-yu-shi-yong.md",
+      "section": "深入理解",
+      "group": "Actions 自动化系统",
+      "level": "Beginner"
+    },
+    {
+      "slug": "13-bian-xie-zi-ding-yi-actions",
+      "title": "编写自定义 Actions",
+      "file": "13-bian-xie-zi-ding-yi-actions.md",
+      "section": "深入理解",
+      "group": "Actions 自动化系统",
+      "level": "Advanced"
+    },
+    {
+      "slug": "14-action-triggers-zi-dong-hua-hong-fa",
+      "title": "Action Triggers 自动化触发",
+      "file": "14-action-triggers-zi-dong-hua-hong-fa.md",
+      "section": "深入理解",
+      "group": "Actions 自动化系统",
+      "level": "Advanced"
+    },
+    {
+      "slug": "15-cli-ming-ling-xiang-jie",
+      "title": "CLI 命令详解",
+      "file": "15-cli-ming-ling-xiang-jie.md",
+      "section": "深入理解",
+      "group": "CLI 与 Python SDK",
+      "level": "Beginner"
+    },
+    {
+      "slug": "16-python-sdk-ji-cheng-kai-fa",
+      "title": "Python SDK 集成开发",
+      "file": "16-python-sdk-ji-cheng-kai-fa.md",
+      "section": "深入理解",
+      "group": "CLI 与 Python SDK",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "17-wen-jian-shang-chuan-yu-xia-zai",
+      "title": "文件上传与下载",
+      "file": "17-wen-jian-shang-chuan-yu-xia-zai.md",
+      "section": "深入理解",
+      "group": "数据管理",
+      "level": "Beginner"
+    },
+    {
+      "slug": "18-yuan-shu-ju-yu-biao-qian-xi-tong",
+      "title": "元数据与标签系统",
+      "file": "18-yuan-shu-ju-yu-biao-qian-xi-tong.md",
+      "section": "深入理解",
+      "group": "数据管理",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "19-wen-jian-chu-li-yu-ge-shi-zhuan-huan",
+      "title": "文件处理与格式转换",
+      "file": "19-wen-jian-chu-li-yu-ge-shi-zhuan-huan.md",
+      "section": "深入理解",
+      "group": "数据管理",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "20-fang-wen-zu-yu-cheng-yuan-guan-li",
+      "title": "访问组与成员管理",
+      "file": "20-fang-wen-zu-yu-cheng-yuan-guan-li.md",
+      "section": "深入理解",
+      "group": "权限与访问控制",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "21-xiang-mu-yu-ren-wu-quan-xian-mo-xing",
+      "title": "项目与任务权限模型",
+      "file": "21-xiang-mu-yu-ren-wu-quan-xian-mo-xing.md",
+      "section": "深入理解",
+      "group": "权限与访问控制",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "22-shu-ju-ku-qian-yi-yu-ban-ben-kong-zhi",
+      "title": "数据库迁移与版本控制",
+      "file": "22-shu-ju-ku-qian-yi-yu-ban-ben-kong-zhi.md",
+      "section": "深入理解",
+      "group": "数据库管理",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "23-shu-ju-ku-jia-gou-she-ji",
+      "title": "数据库架构设计",
+      "file": "23-shu-ju-ku-jia-gou-she-ji.md",
+      "section": "深入理解",
+      "group": "数据库管理",
+      "level": "Advanced"
+    },
+    {
+      "slug": "24-hou-duan-dan-yuan-ce-shi-yu-ji-cheng-ce-shi",
+      "title": "后端单元测试与集成测试",
+      "file": "24-hou-duan-dan-yuan-ce-shi-yu-ji-cheng-ce-shi.md",
+      "section": "深入理解",
+      "group": "测试策略",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "25-cli-duan-dao-duan-ce-shi",
+      "title": "CLI 端到端测试",
+      "file": "25-cli-duan-dao-duan-ce-shi.md",
+      "section": "深入理解",
+      "group": "测试策略",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "26-docker-rong-qi-bian-pai",
+      "title": "Docker 容器编排",
+      "file": "26-docker-rong-qi-bian-pai.md",
+      "section": "深入理解",
+      "group": "部署与运维",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "27-jian-kong-yu-ri-zhi-xi-tong",
+      "title": "监控与日志系统",
+      "file": "27-jian-kong-yu-ri-zhi-xi-tong.md",
+      "section": "深入理解",
+      "group": "部署与运维",
+      "level": "Advanced"
+    },
+    {
+      "slug": "28-sheng-chan-huan-jing-bu-shu-pei-zhi",
+      "title": "生产环境部署配置",
+      "file": "28-sheng-chan-huan-jing-bu-shu-pei-zhi.md",
+      "section": "深入理解",
+      "group": "部署与运维",
+      "level": "Advanced"
+    }
+  ]
+}

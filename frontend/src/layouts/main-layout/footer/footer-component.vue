@@ -7,7 +7,7 @@
             >
                 <div class="flex" style="gap: 8px">
                     <span>
-                        © {{ year }} ETH Zürich - Robotic Systems Lab (RSL)
+                        © {{ year }} TsingtaoAI - Robotic Systems Lab (RSL)
                     </span>
                     <footer-separator />
                     <footer-build-info />
