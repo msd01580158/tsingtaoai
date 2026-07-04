@@ -1,7 +1,7 @@
 <template>
     <q-btn-dropdown
         v-model="ddr_open2"
-        label="Add Optional Metadata"
+        label="添加可选元数据"
         class="q-uploader--bordered full-width q-mb-lg"
         flat
         clearable
@@ -9,7 +9,7 @@
         :disabled="availableAdditionalTags.length === 0"
     >
         <q-tooltip v-if="availableAdditionalTags.length === 0">
-            All available tags types have been added.
+            所有可用元数据类型已全部添加。
         </q-tooltip>
         <q-list>
             <q-item
@@ -32,7 +32,7 @@
                             class="q-ml-sm"
                         >
                             <q-tooltip>
-                                Metadata of Type {{ tagtype.datatype }}
+                                元数据类型： {{ tagtype.datatype }}
                             </q-tooltip>
                         </q-icon>
                     </q-item-label>
@@ -92,7 +92,7 @@
                         (val) =>
                             val === true ||
                             val === false ||
-                            'Please select a value',
+                            '请选择一个值',
                     ]"
                     color="black"
                     dense
@@ -104,7 +104,7 @@
                         v-model="localTagValues[tagtype.uuid]"
                         :label="
                             localTagValues[tagtype.uuid] === undefined
-                                ? 'Click toggle to define value'
+                                ? '点击开关设置值'
                                 : localTagValues[tagtype.uuid]
                                   ? 'True'
                                   : 'False'
@@ -133,7 +133,7 @@
                     @click="() => removeTagType(tagtype.uuid)"
                 >
                     <q-tooltip v-if="isRequired(tagtype)">
-                        You cannot delete enforced metadata.
+                        无法删除强制元数据。
                     </q-tooltip>
                 </q-btn>
             </div>

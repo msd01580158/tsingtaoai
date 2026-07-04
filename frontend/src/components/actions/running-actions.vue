@@ -1,7 +1,7 @@
 <template>
     <div class="projects-container dashboard-card">
         <q-card class="full-width q-pa-md header-row" flat>
-            <span style="font-size: larger">Running Actions</span>
+            <span style="font-size: larger">运行中的任务</span>
             <div class="arrow-buttons">
                 <q-btn
                     flat

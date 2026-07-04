@@ -103,7 +103,10 @@ export default defineConfig((/* ctx */) => {
                 viteConfig.envDir = path.resolve(__dirname, '..');
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 viteConfig.envPrefix = ['VITE_', 'BACKEND_URL'];
-
+                // ========== 新增这2行，放在最前面 ==========
+                viteConfig.server = viteConfig.server ?? {};
+                viteConfig.server.allowedHosts = 'all';
+                // =========================================
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
                 viteConfig.optimizeDeps = viteConfig.optimizeDeps ?? {};
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access

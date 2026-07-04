@@ -2,7 +2,7 @@
     <div class="projects-container dashboard-card">
         <!-- Static Row with Title and Arrows -->
         <q-card class="full-width q-pa-md header-row" flat>
-            <span style="font-size: larger">Recently used projects</span>
+            <span style="font-size: larger">最近使用的项目</span>
             <div class="arrow-buttons">
                 <template v-if="projects.length > 0">
                     <q-btn

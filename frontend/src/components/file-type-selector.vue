@@ -60,7 +60,7 @@ const options = computed(() => {
         label: opt.name,
         value: opt.name,
     }));
-    return [{ label: 'All', value: 'ALL', special: true }, ...optionsList];
+    return [{ label: '全部', value: 'ALL', special: true }, ...optionsList];
 });
 
 // Compute currently selected keys (strings)

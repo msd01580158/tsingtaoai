@@ -11,7 +11,7 @@
             anchor="top middle"
             self="bottom middle"
         >
-            Artifact upload in progress
+            附件正在上传中
         </q-tooltip>
         {{ action.state }}
     </q-badge>

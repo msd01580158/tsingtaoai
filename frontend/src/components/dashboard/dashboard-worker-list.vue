@@ -3,9 +3,9 @@
         class="dashboard-card"
         style="grid-row: span 2; grid-column: span 1; background-color: white"
     >
-        <!-- Top row with Device Availability -->
+        <!-- Top row with 设备列表 -->
         <q-card class="full-width q-pa-md" flat>
-            <span style="font-size: larger">Device Availability</span>
+            <span style="font-size: larger">设备列表</span>
         </q-card>
 
         <q-separator />

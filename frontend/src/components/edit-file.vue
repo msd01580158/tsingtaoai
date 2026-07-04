@@ -1,6 +1,6 @@
 <template>
     <base-dialog ref="dialogRef">
-        <template #title> Edit File </template>
+        <template #title> 编辑文件 </template>
         <template #tabs>
             <q-tabs
                 v-model="tab"
@@ -11,12 +11,12 @@
             >
                 <q-tab
                     name="name"
-                    label="Name & Location"
+                    label="名称与归属"
                     style="color: #222"
                 />
                 <q-tab
                     name="categories"
-                    label="Configure Categories"
+                    label="分类配置"
                     style="color: #222"
                 />
             </q-tabs>
@@ -24,7 +24,7 @@
         <template #content>
             <q-tab-panels v-model="tab">
                 <q-tab-panel name="name" style="min-height: 280px">
-                    <label for="filename" class="q-my-md">Filename</label>
+                    <label for="filename" class="q-my-md">文件名</label>
                     <q-input
                         v-if="editableFile"
                         v-model="editableFile.filename"
@@ -54,13 +54,13 @@
         </template>
         <template #actions>
             <q-btn
-                label="Cancel"
+                label="取消"
                 flat
                 class="q-mr-sm button-border"
                 @click="onDialogCancel"
             />
             <q-btn
-                label="Save"
+                label="保存"
                 class="bg-button-primary"
                 :disable="
                     !dateTime ||
@@ -148,7 +148,7 @@ const { mutate: updateFileMutation } = useMutation({
     onSuccess: async () => {
         Notify.create({
             group: false,
-            message: 'File updated',
+            message: '文件已更新',
             color: 'positive',
             spinner: false,
             position: 'bottom',

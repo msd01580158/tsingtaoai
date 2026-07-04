@@ -1,13 +1,13 @@
 <template>
     <q-card-section class="q-pa-md">
         <p>
-            Please confirm by entering the mission name:
+            请输入任务名称确认删除:
             <b>{{ mission.name }}</b>
         </p>
         <q-input
             v-model="missionNameCheck"
             outlined
-            placeholder="Confirm Mission Name"
+            placeholder="输入任务名称确认"
             autofocus
         />
     </q-card-section>
@@ -51,7 +51,7 @@ const deleteMissionAction = async (): Promise<void> => {
                 });
 
                 Notify.create({
-                    message: 'Mission deleted',
+                    message: '任务已删除',
                     color: 'positive',
                     timeout: 2000,
                     position: 'bottom',
@@ -73,26 +73,26 @@ const deleteMissionAction = async (): Promise<void> => {
                     if (error.response) {
                         const status = error.response.status;
                         if (status === 403) {
-                            errorMessage = 'Mission access denied.';
+                            errorMessage = '无权限删除任务.';
                         } else if (status === 409) {
-                            errorMessage = 'Mission may contain files.';
+                            errorMessage = '任务内仍存在文件，无法删除.';
                         } else {
                             // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                            errorMessage = `Server responded with status: ${status}`;
+                            errorMessage = `服务器返回错误码: ${status}`;
                         }
                     } else if (error.request) {
-                        errorMessage = 'No response received from the server';
+                        errorMessage = '服务器无响应';
                     } else {
                         errorMessage = error.message;
                     }
                 } else if (error instanceof Error) {
                     errorMessage = error.message;
                 } else {
-                    errorMessage = 'An unknown error occurred';
+                    errorMessage = '未知删除错误';
                 }
 
                 Notify.create({
-                    message: `Error deleting mission: ${errorMessage}`,
+                    message: `删除任务失败: ${errorMessage}`,
                     color: 'negative',
                     position: 'bottom',
                 });

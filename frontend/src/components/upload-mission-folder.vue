@@ -34,7 +34,7 @@ const canCreate = computed(() => {
 const createNewMission = () => {
     if (!canCreate.value) return;
     $q.dialog({
-        title: 'Create new mission',
+        title: '创建新任务',
         component: NewMissionByFolderDialog,
         componentProps: {
             projectUuid: projectUuid,

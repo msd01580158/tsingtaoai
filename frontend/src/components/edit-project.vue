@@ -1,6 +1,6 @@
 <template>
     <div v-if="project">
-        <label for="projectName">Project Name *</label>
+        <label for="projectName">项目名称 *</label>
         <q-input
             ref="projectNameInput"
             v-model="projectName"
@@ -8,57 +8,43 @@
             outlined
             autofocus
             style="padding-bottom: 30px"
-            placeholder="Name..."
+            placeholder="填写名称......"
             :rules="[
-                (val) => !!val || 'A project name cannot be empty!',
-                (val) =>
-                    val.length <= 20 ||
-                    'Project name must be less than 20 characters long!',
-                (val) =>
-                    val.length >= 3 ||
-                    'Project name must be at least 3 characters long!',
-                (val) =>
-                    /^[a-zA-Z0-9-_]*$/.test(val) ||
-                    `Project names can only contain letters, numbers, hyphens, and underscores! It contains: ${
-                        val
-                            .match(/[^a-zA-Z0-9-_]/g)
-                            .map((c: string) => `'${c}'`)
-                            .join(', ') || ''
-                    }`,
-                (val) =>
-                    !invalidProjectNames.includes(val) ||
-                    'A project with that name already exists!',
+                (val) => !!val || '项目名称不能为空!',
+                (val) => val.length <= 20 || '项目名称不能超过20个字符!',
+                (val) => val.length >= 3 || '项目名称至少3个字符!',
+                (val) => /^[a-zA-Z0-9-_]*$/.test(val) || `仅允许字母、数字、横杠、下划线，非法字符：${val.match(/[^a-zA-Z0-9-_]/g)?.map(c => `'${c}'`).join(', ') || ''}`,
+                (val) => !invalidProjectNames.includes(val) || '该项目名称已存在!',
             ]"
             @update:model-value="onProjectNameUpdate"
         />
 
-        <label for="projectDescription">Project Description *</label>
+        <label for="projectDescription">项目描述 *</label>
         <q-input
             v-model="projectDescription"
             autofocus
             name="projectDescription"
             type="textarea"
             outlined
-            placeholder="Description..."
-            :rules="[(val) => !!val || 'Project Description is required']"
+            placeholder="填写描述..."
+            :rules="[(val) => !!val || '项目描述不能为空']"
             @update:model-value="onProjectNameUpdate"
         />
 
         <div class="flex column">
             <label for="autoConvert"
-                >Enable Auto-Convert to mcap format *</label
+                >自动转换为 mcap 文件 *</label
             >
             <q-toggle
                 v-model="autoConvert"
                 name="autoConvert"
-                label="auto-convert to mcap"
+                label="开启自动转mcap格式"
                 color="primary"
                 dense
                 style="margin: 10px 0"
             />
             <span class="text-grey-8">
-                Enable Auto-Convert to mcap format has some known limitations.
-                Please refer to
+                自动转换功能存在已知限制，详情查看：
                 https://github.com/leggedrobotics/kleinkram/issues/1250.
             </span>
         </div>
@@ -113,13 +99,13 @@ async function save_changes(): Promise<void> {
 
     // validate input
     if (!project.value?.uuid) {
-        throw new Error('Project UUID is not valid');
+        throw new Error('项目UUID无效');
     }
     if (!project.value.name) {
-        throw new Error('Project name is not valid');
+        throw new Error('项目名称不能为空');
     }
     if (!project.value.description) {
-        throw new Error('Project description is not valid');
+        throw new Error('项目描述不能为空');
     }
 
     await updateProject(
@@ -133,18 +119,18 @@ async function save_changes(): Promise<void> {
             error instanceof Error
                 ? error.message
                 : ((error as { response?: { data?: { message?: string } } })
-                      .response?.data?.message ?? 'Unknown error');
+                      .response?.data?.message ?? '未知错误');
 
         if (errorMessage.includes('Project')) {
             Notify.create({
-                message: `Error updating project: ${errorMessage}`,
+                message: `项目更新失败: ${errorMessage}`,
                 color: 'negative',
                 position: 'bottom',
                 timeout: 5000,
             });
         } else {
             Notify.create({
-                message: `Error updating project: ${errorMessage}`,
+                message: `项目更新失败: ${errorMessage}`,
                 color: 'negative',
                 position: 'bottom',
                 timeout: 5000,
@@ -169,7 +155,7 @@ async function save_changes(): Promise<void> {
     );
 
     Notify.create({
-        message: 'Project updated successfully',
+        message: '项目更新成功',
         color: 'positive',
         position: 'bottom',
         timeout: 2000,

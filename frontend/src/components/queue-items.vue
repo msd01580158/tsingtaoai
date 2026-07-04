@@ -1,7 +1,7 @@
 <template>
     <div class="row items-center">
         <div class="col-5 q-py-md q-pr-md">
-            <q-input v-model="startDate" filled hint="File Processing since: ">
+            <q-input v-model="startDate" filled hint="文件处理起始时间： ">
                 <template #prepend>
                     <q-icon name="sym_o_event" class="cursor-pointer">
                         <q-popup-proxy
@@ -13,7 +13,7 @@
                                 <div class="row items-center justify-end">
                                     <q-btn
                                         v-close-popup
-                                        label="Close"
+                                        label="关闭"
                                         color="primary"
                                         flat
                                     />
@@ -38,7 +38,7 @@
                                 <div class="row items-center justify-end">
                                     <q-btn
                                         v-close-popup
-                                        label="Close"
+                                        label="关闭"
                                         color="primary"
                                         flat
                                     />
@@ -55,7 +55,7 @@
                 multiple
                 clearable
                 :options="FileStateOptions"
-                label="Select filter"
+                label="状态筛选"
             >
                 <template #selected-item="scope">
                     <q-chip
@@ -75,7 +75,7 @@
                 <template #no-option>
                     <q-item>
                         <q-item-section class="text-grey">
-                            No results
+                            无匹配选项
                         </q-item-section>
                     </q-item>
                 </template>
@@ -148,7 +148,7 @@
                                 "
                                 @click="() => downloadFile(props.row)"
                             >
-                                <q-item-section>Download File</q-item-section>
+                                <q-item-section>下载文件</q-item-section>
                             </q-item>
                             <q-item
                                 v-ripple
@@ -156,7 +156,7 @@
                                 :disable="!canDelete(props.row)"
                                 @click="() => openDeleteFileDialog(props.row)"
                             >
-                                <q-item-section>Delete File</q-item-section>
+                                <q-item-section>删除文件</q-item-section>
                             </q-item>
                             <q-item
                                 v-ripple
@@ -174,7 +174,7 @@
                                 "
                             >
                                 <q-item-section>
-                                    Cancel Processing
+                                    取消处理任务
                                 </q-item-section>
                             </q-item>
                         </q-list>
@@ -370,14 +370,14 @@ const columns = [
     {
         name: 'Project',
         required: true,
-        label: 'Project',
+        label: '项目',
         align: 'left',
         field: (row: FileQueueEntryDto): string => row.mission.project.name,
     },
     {
         name: 'Mission',
         required: true,
-        label: 'Mission',
+        label: '任务',
         align: 'left',
         field: (row: FileQueueEntryDto): string => row.mission.name,
     },
@@ -385,28 +385,28 @@ const columns = [
     {
         name: 'Location',
         required: true,
-        label: 'File Origin',
+        label: '文件来源',
         align: 'left',
         field: 'location',
     },
     {
         name: 'Filename',
         required: true,
-        label: 'Filename',
+        label: '文件名',
         align: 'left',
         field: (row: FileQueueEntryDto): string => {
             if (
                 row.displayName === row.identifier &&
                 row.location === FileLocation.DRIVE
             )
-                return 'Not available';
+                return '暂无名称';
             return row.displayName;
         },
     },
     {
         name: 'change',
         required: true,
-        label: 'Last status update',
+        label: '状态更新时间',
         align: 'left',
         field: (row: FileQueueEntryDto): string =>
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -415,14 +415,14 @@ const columns = [
     {
         name: 'Creator',
         required: true,
-        label: 'Creator',
+        label: '创建人',
         align: 'left',
         field: (row: FileQueueEntryDto): string => row.creator.name,
     },
     {
         name: 'action',
         required: true,
-        label: '',
+        label: '操作',
         align: 'center',
         field: 'Edit',
         style: 'width: 100px',

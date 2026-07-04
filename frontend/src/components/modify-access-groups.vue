@@ -4,12 +4,12 @@
             <div class="col-10">
                 <app-search-bar
                     v-model="search"
-                    placeholder="Search User / Access Group"
+                    placeholder="搜索用户/访问组"
                 />
             </div>
         </div>
         <div class="row" style="margin-top: 15px">
-            <b>Individual Users</b>
+            <b>独立用户</b>
         </div>
         <q-table
             v-if="foundUsers && foundUsers.count > 0"
@@ -42,7 +42,7 @@
         </q-table>
 
         <div class="row">
-            <b>Access Groups</b>
+            <b>访问权限组</b>
         </div>
         <q-table
             v-if="foundAccessGroups && foundAccessGroups.length > 0"
@@ -129,13 +129,13 @@ const columns = [
     {
         name: 'name',
         required: true,
-        label: 'Name',
+        label: '名称',
         align: 'left',
     },
     {
         name: 'rights',
         required: true,
-        label: 'Rights',
+        label: '权限',
         align: 'left',
         field: 'rights',
         format: (value: string) => value,

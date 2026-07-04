@@ -2,9 +2,9 @@
     <q-dialog ref="dialogRef" @hide="onDialogHide">
         <q-card class="q-dialog-plugin" style="min-width: 500px">
             <q-card-section>
-                <div class="text-h6">Invalid Filenames</div>
+                <div class="text-h6">文件名不合规</div>
                 <div class="text-caption text-grey">
-                    The following files have invalid names. Please rename them
+                    以下文件名称不符合规范，请修改后再上传
                     to proceed.
                 </div>
             </q-card-section>
@@ -18,7 +18,7 @@
                     <div class="row items-baseline">
                         <q-input
                             v-model="file.newNamePart"
-                            :label="`Rename '${file.originalName}'`"
+                            :label="`重命名文件 '${file.originalName}'`"
                             :error="
                                 !!file.error ||
                                 !isValidNamePart(file.newNamePart)
@@ -27,7 +27,7 @@
                                 file.error ||
                                 (isValidNamePart(file.newNamePart)
                                     ? ''
-                                    : 'Invalid characters in filename')
+                                    : '文件名包含非法字符')
                             "
                             dense
                             outlined
@@ -50,13 +50,13 @@
             <q-card-actions align="right">
                 <q-btn
                     color="primary"
-                    label="Cancel"
+                    label="取消"
                     flat
                     @click="onDialogCancel"
                 />
                 <q-btn
                     color="primary"
-                    label="Retry Upload"
+                    label="请重新上传"
                     :disable="!isValid"
                     @click="onOKClick"
                 />

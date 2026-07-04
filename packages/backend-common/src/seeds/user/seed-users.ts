@@ -40,9 +40,9 @@ export const seedUsers = async (
         // eslint-disable-next-line no-console
         console.log('Existing users:', users.map((u) => u.email).join(', '));
 
-        const adminUser = users.find((u) => u.email === 'admin@kleinkram.dev');
+        const adminUser = users.find((u) => u.email === 'mashideng@nuit.edu.cn');
         const internalUser = users.find(
-            (u) => u.email === 'internal-user@kleinkram.dev',
+            (u) => u.email === 'mashideng@nuit.edu.cn',
         );
         const externalUser = users.find(
             (u) => u.email === 'external-user@example.com',
@@ -81,14 +81,14 @@ export const seedUsers = async (
         return factoryManager.get(UserEntity).setMeta(context).save();
     };
 
-    const adminUser = await createOrGetUser('admin@kleinkram.dev', {
-        mail: 'admin@kleinkram.dev',
+    const adminUser = await createOrGetUser('mashideng@nuit.edu.cn', {
+        mail: 'mashideng@nuit.edu.cn',
         role: UserRole.ADMIN,
         defaultGroupIds: ['00000000-0000-0000-0000-000000000000'],
     } as UserContext);
 
-    const internalUser = await createOrGetUser('internal-user@kleinkram.dev', {
-        mail: 'internal-user@kleinkram.dev',
+    const internalUser = await createOrGetUser('internal-user@kleim.dev', {
+        mail: 'internal-user@kleim.dev',
         role: UserRole.USER,
     } as UserContext);
 

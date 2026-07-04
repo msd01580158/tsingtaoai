@@ -121,10 +121,10 @@ const inputPlaceholder = (datatype: DataType | undefined): string => {
             return '0';
         }
         case DataType.DATE: {
-            return 'dd.mm.yyyy';
+            return '日.月.年';
         }
         default: {
-            return 'Enter value...';
+            return '输入内容...';
         }
     }
 };

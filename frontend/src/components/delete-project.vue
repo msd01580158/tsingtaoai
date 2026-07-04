@@ -1,13 +1,13 @@
 <template>
     <q-card-section class="q-pa-md">
         <p>
-            Please confirm by entering the Project name:
+            请输入项目名称确认删除：:
             <b>{{ project.name }}</b>
         </p>
         <q-input
             v-model="projectNameCheck"
             outlined
-            placeholder="Confirm Project Name"
+            placeholder="输入项目名称确认"
             autofocus
         />
     </q-card-section>
@@ -40,7 +40,7 @@ async function deleteProjectAction(): Promise<void> {
                             query.queryKey[1] === project.uuid),
                 });
                 Notify.create({
-                    message: 'Project deleted',
+                    message: '项目已删除',
                     color: 'positive',
                     timeout: 2000,
                     position: 'bottom',
@@ -57,10 +57,10 @@ async function deleteProjectAction(): Promise<void> {
                               error as {
                                   response?: { data?: { message?: string } };
                               }
-                          ).response?.data?.message ?? 'Unknown error');
+                          ).response?.data?.message ?? '未知错误');
 
                 Notify.create({
-                    message: `Error deleting project: ${errorMessage}`,
+                    message: `删除项目失败: ${errorMessage}`,
                     color: 'negative',
                     position: 'bottom',
                 });

@@ -19,7 +19,7 @@
         </div>
         <div class="col-1 q-pa-md">
             <q-btn color="primary" icon="sym_o_add" @click="openAddTag">
-                Add Metadata
+                添加元数据
             </q-btn>
         </div>
     </div>
@@ -72,7 +72,7 @@ const { mutate: removeTagCallback } = useMutation({
     mutationFn: (tag: TagDto) => removeTag(tag.uuid),
     async onSuccess() {
         Notify.create({
-            message: 'Tag removed',
+            message: 'Tag 已移除',
             color: 'positive',
             position: 'bottom',
         });
