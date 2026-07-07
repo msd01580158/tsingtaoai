@@ -381,7 +381,7 @@ const columns = [
         align: 'left',
         field: (row: FileQueueEntryDto): string => row.mission.name,
     },
-    { name: 'Status', label: 'Status', align: 'left', field: 'state' },
+    { name: 'Status', label: '状态', align: 'left', field: 'state' },
     {
         name: 'Location',
         required: true,
@@ -406,7 +406,7 @@ const columns = [
     {
         name: 'change',
         required: true,
-        label: '状态更新时间',
+	        label: '状态更新时间',
         align: 'left',
         field: (row: FileQueueEntryDto): string =>
             // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
@@ -415,7 +415,7 @@ const columns = [
     {
         name: 'Creator',
         required: true,
-        label: '创建人',
+	        label: '创建人',
         align: 'left',
         field: (row: FileQueueEntryDto): string => row.creator.name,
     },

@@ -190,14 +190,14 @@ const columns: QTableColumn<SelectedProject>[] = [
     {
         name: 'name',
         required: true,
-        label: 'Name',
+        label: '名称',
         align: 'left',
         field: 'name',
     },
     {
         name: 'rights',
         required: true,
-        label: 'Rights',
+        label: '权限',
         align: 'left',
         field: 'rights',
     },

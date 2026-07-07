@@ -1,5 +1,5 @@
 <template>
-    <title-section title="Action Details">
+    <title-section title="执行详情">
         <template #tabs>
             <q-tabs
                 v-model="tab"

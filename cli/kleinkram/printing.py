@@ -63,7 +63,7 @@ FILE_VERIFICATION_STATUS_STYLES = {
 
 
 def _add_placeholder_row(table: Table, skipped: int) -> None:
-    first_column = f"... ({skipped} more)"
+    first_column = f"...（还有 {skipped} 项）"
     table.add_row(first_column, *["..." for _ in range(len(table.columns) - 1)])
 
 
@@ -130,10 +130,10 @@ def parse_metadata_value(value: MetadataValue) -> Union[str, float, bool, dateti
 
 
 def projects_to_table(projects: Sequence[Project]) -> Table:
-    table = Table(title="projects")
-    table.add_column("id")
-    table.add_column("name")
-    table.add_column("description")
+    table = Table(title="项目列表")
+    table.add_column("ID")
+    table.add_column("名称")
+    table.add_column("描述")
 
     max_table_size = get_shared_state().max_table_size
     for project in projects[:max_table_size]:
@@ -144,12 +144,12 @@ def projects_to_table(projects: Sequence[Project]) -> Table:
 
 
 def missions_to_table(missions: Sequence[Mission]) -> Table:
-    table = Table(title="missions")
-    table.add_column("project")
-    table.add_column("name")
-    table.add_column("id")
-    table.add_column("files")
-    table.add_column("size")
+    table = Table(title="任务列表")
+    table.add_column("项目")
+    table.add_column("名称")
+    table.add_column("ID")
+    table.add_column("文件数")
+    table.add_column("大小")
 
     # order by project, name
     missions_tp: List[Tuple[str, str, Mission]] = []
@@ -180,15 +180,15 @@ def missions_to_table(missions: Sequence[Mission]) -> Table:
     return table
 
 
-def files_to_table(files: Sequence[File], *, title: str = "files", delimiters: bool = True) -> Table:
+def files_to_table(files: Sequence[File], *, title: str = "文件列表", delimiters: bool = True) -> Table:
     table = Table(title=title)
-    table.add_column("project")
-    table.add_column("mission")
-    table.add_column("name")
-    table.add_column("id")
-    table.add_column("state")
-    table.add_column("size")
-    table.add_column("categories")
+    table.add_column("项目")
+    table.add_column("任务")
+    table.add_column("名称")
+    table.add_column("ID")
+    table.add_column("状态")
+    table.add_column("大小")
+    table.add_column("类别")
 
     # order by project, mission, name
     files_tp: List[Tuple[str, str, str, File]] = []
@@ -223,44 +223,44 @@ def files_to_table(files: Sequence[File], *, title: str = "files", delimiters: b
 
 
 def file_info_table(file: File) -> Table:
-    table = Table("k", "v", title=f"file info: {file.name}", show_header=False)
+    table = Table("k", "v", title=f"文件信息：{file.name}", show_header=False)
 
-    table.add_row("name", file.name)
-    table.add_row("id", Text(str(file.id), style="green"))
-    table.add_row("project", file.project_name)
-    table.add_row("project id", Text(str(file.project_id), style="green"))
-    table.add_row("mission", file.mission_name)
-    table.add_row("mission id", Text(str(file.mission_id), style="green"))
-    table.add_row("created", str(file.created_at))
-    table.add_row("updated", str(file.updated_at))
-    table.add_row("size", format_bytes(file.size))
-    table.add_row("state", file_state_to_text(file.state))
-    table.add_row("categories", ", ".join(file.categories))
-    table.add_row("topics", ", ".join(file.topics))
-    table.add_row("hash", file.hash)
-    table.add_row("type", file.type_)
-    table.add_row("date", str(file.date))
+    table.add_row("名称", file.name)
+    table.add_row("ID", Text(str(file.id), style="green"))
+    table.add_row("项目", file.project_name)
+    table.add_row("项目 ID", Text(str(file.project_id), style="green"))
+    table.add_row("任务", file.mission_name)
+    table.add_row("任务 ID", Text(str(file.mission_id), style="green"))
+    table.add_row("创建时间", str(file.created_at))
+    table.add_row("更新时间", str(file.updated_at))
+    table.add_row("大小", format_bytes(file.size))
+    table.add_row("状态", file_state_to_text(file.state))
+    table.add_row("类别", ", ".join(file.categories))
+    table.add_row("主题", ", ".join(file.topics))
+    table.add_row("哈希", file.hash)
+    table.add_row("类型", file.type_)
+    table.add_row("日期", str(file.date))
 
     return table
 
 
 def mission_info_table(mission: Mission, print_metadata: bool = True) -> Tuple[Table, ...]:
-    table = Table("k", "v", title=f"mission info: {mission.name}", show_header=False)
+    table = Table("k", "v", title=f"任务信息：{mission.name}", show_header=False)
 
     # TODO: add more fields as we store more information in the Mission object
-    table.add_row("name", mission.name)
-    table.add_row("id", Text(str(mission.id), style="green"))
-    table.add_row("project", mission.project_name)
-    table.add_row("project id", Text(str(mission.project_id), style="green"))
-    table.add_row("created", str(mission.created_at))
-    table.add_row("updated", str(mission.updated_at))
-    table.add_row("size", format_bytes(mission.size))
-    table.add_row("files", str(mission.number_of_files))
+    table.add_row("名称", mission.name)
+    table.add_row("ID", Text(str(mission.id), style="green"))
+    table.add_row("项目", mission.project_name)
+    table.add_row("项目 ID", Text(str(mission.project_id), style="green"))
+    table.add_row("创建时间", str(mission.created_at))
+    table.add_row("更新时间", str(mission.updated_at))
+    table.add_row("大小", format_bytes(mission.size))
+    table.add_row("文件数", str(mission.number_of_files))
 
     if not print_metadata:
         return (table,)
 
-    metadata_table = Table("k", "v", title="mission metadata", show_header=False)
+    metadata_table = Table("k", "v", title="任务元数据", show_header=False)
     kv_pairs_sorted = sorted([(k, v) for k, v in mission.metadata.items()], key=lambda x: x[0])
     for k, v in kv_pairs_sorted:
         metadata_table.add_row(k, str(parse_metadata_value(v)))
@@ -269,15 +269,15 @@ def mission_info_table(mission: Mission, print_metadata: bool = True) -> Tuple[T
 
 
 def project_info_table(project: Project) -> Table:
-    table = Table("k", "v", title=f"project info: {project.name}", show_header=False)
+    table = Table("k", "v", title=f"项目信息：{project.name}", show_header=False)
 
     # TODO: add more fields as we store more information in the Project object
-    table.add_row("id", Text(str(project.id), style="green"))
-    table.add_row("name", project.name)
-    table.add_row("description", project.description)
-    table.add_row("created", str(project.created_at))
-    table.add_row("updated", str(project.updated_at))
-    table.add_row("required tags", ", ".join(project.required_tags))
+    table.add_row("ID", Text(str(project.id), style="green"))
+    table.add_row("名称", project.name)
+    table.add_row("描述", project.description)
+    table.add_row("创建时间", str(project.created_at))
+    table.add_row("更新时间", str(project.updated_at))
+    table.add_row("必需标签", ", ".join(project.required_tags))
 
     return table
 
@@ -285,9 +285,9 @@ def project_info_table(project: Project) -> Table:
 def file_verification_status_table(
     file_status: Mapping[Path, FileVerificationStatus],
 ) -> Table:
-    table = Table(title="file status")
-    table.add_column("filename", style="cyan")
-    table.add_column("status", style="green")
+    table = Table(title="文件状态")
+    table.add_column("文件名", style="cyan")
+    table.add_column("状态", style="green")
     for path, status in file_status.items():
         table.add_row(str(path), file_verification_status_to_text(status))
     return table
@@ -391,13 +391,13 @@ def print_project_info(project: Project, *, pprint: bool) -> None:
 
 
 def runs_to_table(runs: Sequence[Run]) -> Table:
-    table = Table(title="action runs")
-    table.add_column("project")
-    table.add_column("mission")
-    table.add_column("template")
-    table.add_column("run id")
-    table.add_column("status")
-    table.add_column("created")
+    table = Table(title="执行记录")
+    table.add_column("项目")
+    table.add_column("任务")
+    table.add_column("模板")
+    table.add_column("运行 ID")
+    table.add_column("状态")
+    table.add_column("创建时间")
 
     # order by created_at descending
     runs_sorted = sorted(runs, key=lambda r: r.created_at, reverse=True)
@@ -419,17 +419,17 @@ def runs_to_table(runs: Sequence[Run]) -> Table:
 
 
 def run_info_table(run: Run) -> Table:
-    table = Table("k", "v", title=f"run info: {run.uuid}", show_header=False)
+    table = Table("k", "v", title=f"运行信息：{run.uuid}", show_header=False)
 
-    table.add_row("id", Text(str(run.uuid), style="green"))
-    table.add_row("template", run.template_name)
-    table.add_row("status", run.state)
-    table.add_row("project", run.project_name)
-    table.add_row("mission", run.mission_name)
-    table.add_row("created", str(run.created_at))
+    table.add_row("ID", Text(str(run.uuid), style="green"))
+    table.add_row("模板", run.template_name)
+    table.add_row("状态", run.state)
+    table.add_row("项目", run.project_name)
+    table.add_row("任务", run.mission_name)
+    table.add_row("创建时间", str(run.created_at))
 
-    finished = str(run.updated_at) if run.updated_at else "N/A"
-    table.add_row("updated", finished)
+    finished = str(run.updated_at) if run.updated_at else "无"
+    table.add_row("更新时间", finished)
 
     return table
 
@@ -501,7 +501,7 @@ def print_run_logs(logs: Sequence[LogEntry], *, pprint: bool) -> None:
     contained in pretty_print_log.)
     """
     if not logs:
-        typer.secho("No logs found for this run.", fg=typer.colors.YELLOW)
+        typer.secho("未找到此运行的日志。", fg=typer.colors.YELLOW)
         return
 
     for log_entry in logs:
@@ -513,12 +513,12 @@ def print_run_logs(logs: Sequence[LogEntry], *, pprint: bool) -> None:
 
 def action_templates_to_table(templates: Sequence[ActionTemplate]) -> Table:
     """Creates a rich Table for a list of ActionTemplates."""
-    table = Table(title="Available Action Templates")
+    table = Table(title="可用执行模板")
 
-    table.add_column("Name", style="cyan", no_wrap=True)
-    table.add_column("ID (UUID)", style="magenta")
-    table.add_column("Image Name", style="green")
-    table.add_column("Command", style="cyan")
+    table.add_column("名称", style="cyan", no_wrap=True)
+    table.add_column("ID（UUID）", style="magenta")
+    table.add_column("镜像名称", style="green")
+    table.add_column("命令", style="cyan")
 
     for template in templates:
         uuid_text = Text(str(template.uuid), style="magenta")
@@ -533,7 +533,7 @@ def print_action_templates_table(templates: Sequence[ActionTemplate], *, pprint:
     either using rich or as a simple list of IDs for piping.
     """
     if not templates:
-        typer.echo("No action templates found.")
+        typer.echo("未找到执行模板。")
         return
 
     if pprint:
@@ -574,7 +574,7 @@ def generate_live_layout(run_details: Run) -> Group:
         state_text = f"{run_details.state}"
 
     header_text = Text()
-    header_text.append(f"Running Action {run_details.uuid} ", style="bold")
+    header_text.append(f"正在运行执行 {run_details.uuid} ", style="bold")
     header_text.append(f"{elapsed_str} ", style="dim")
     header_text.append(f"({state_text})", style=status_color)
 
@@ -588,9 +588,9 @@ def generate_live_layout(run_details: Run) -> Group:
     if not last_logs:
         logs_text.append(" => ", style="blue")
         if state_upper in {"DONE", "FAILED", "UNPROCESSABLE"}:
-            logs_text.append("No logs produced.", style="dim")
+            logs_text.append("未产生日志。", style="dim")
         else:
-            logs_text.append("Waiting for logs...", style="dim")
+            logs_text.append("等待日志中...", style="dim")
     else:
         for i, log in enumerate(last_logs):
             logs_text.append(" => ", style="blue")
@@ -616,7 +616,7 @@ def follow_run_logs(client: AuthenticatedClient, run_uuid: str) -> int:
     Returns:
         An exit code (0 for success, 1 for failure).
     """
-    typer.echo(f"Following logs for run {run_uuid}...")
+    typer.echo(f"正在跟踪运行 {run_uuid} 的日志...")
 
     TERMINAL_STATES = {"DONE", "FAILED", "UNPROCESSABLE"}
     current_run_state = None
@@ -644,7 +644,7 @@ def follow_run_logs(client: AuthenticatedClient, run_uuid: str) -> int:
                     time.sleep(3)  # Wait longer on API errors
                 except httpx.RequestError as e:
                     # Catch raw socket errors (like Connection reset by peer)
-                    err_msg = Text(f"\nConnection lost. Please check your network and try again. ({e})", style="red")
+                    err_msg = Text(f"\n连接断开，请检查网络后重试。（{e}）", style="red")
                     live.console.print(err_msg)
                     time.sleep(3)
 
@@ -661,29 +661,29 @@ def follow_run_logs(client: AuthenticatedClient, run_uuid: str) -> int:
 
             if state_upper == "DONE" and has_warnings:
                 color = typer.colors.YELLOW
-                state_display = "DONE (Completed with Warnings)"
+                state_display = "完成（有警告）"
             elif state_upper == "DONE":
                 color = typer.colors.GREEN
-                state_display = "DONE"
+                state_display = "完成"
             else:
                 color = typer.colors.RED
                 state_display = run_details.state
 
             state_cause_str = f" ({run_details.state_cause})" if run_details.state_cause else ""
             typer.secho(
-                f"\nRun finished with state: {state_display}{state_cause_str}",
+                f"\n运行结束，状态：{state_display}{state_cause_str}",
                 fg=color,
             )
         except httpx.HTTPStatusError as e:
-            typer.secho(f"\nFailed to fetch final run details (API error): {e}", fg=typer.colors.RED)
+            typer.secho(f"\n获取最终运行详情失败（API 错误）：{e}", fg=typer.colors.RED)
         except httpx.RequestError as e:
-            typer.secho(f"\nFailed to fetch final run details (network error): {e}", fg=typer.colors.RED)
+            typer.secho(f"\n获取最终运行详情失败（网络错误）：{e}", fg=typer.colors.RED)
         except Exception as e:
-            typer.secho(f"\nFailed to fetch final run details: {e}", fg=typer.colors.RED)
+            typer.secho(f"\n获取最终运行详情失败：{e}", fg=typer.colors.RED)
 
     except KeyboardInterrupt:
         typer.secho(
-            f"\nStopped following logs. Run {run_uuid} is still processing.",
+            f"\n已停止跟踪日志，运行 {run_uuid} 仍在处理中。",
             fg=typer.colors.YELLOW,
         )
         # Return 0, as the command itself wasn't a failure

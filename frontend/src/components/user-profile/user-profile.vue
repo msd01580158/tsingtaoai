@@ -12,21 +12,21 @@
                     align="left"
                     active-color="primary"
                 >
-                    <q-tab name="Details" label="Details" style="color: #222" />
+                    <q-tab name="Details" label="详细信息" style="color: #222" />
                     <q-tab
                         name="Projects"
-                        label="Projects"
+                        label="项目"
                         style="color: #222"
                     />
                     <q-tab
                         name="Admin"
-                        label="Admin"
+                        label="管理"
                         :disable="user.role === UserRole.USER"
                         style="color: #222"
                     />
                     <q-tab
                         name="Api Tokens"
-                        label="API Tokens"
+                        label="API 令牌"
                         style="color: #222"
                     />
                 </q-tabs>

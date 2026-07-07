@@ -59,10 +59,10 @@ logger = logging.getLogger(__name__)
 CLI_HELP = """\
 Kleinkram CLI
 
-The Kleinkram CLI is a command line interface for Kleinkram.
-For a list of available commands, run `klein --help` or visit \
+Kleinkram CLI 是 Kleinkram 的命令行界面。
+查看可用命令列表，请运行 `klein --help` 或访问 \
 https://docs.datasets.leggedrobotics.com/usage/python/setup \
-for more information.
+获取更多信息。
 """
 
 
@@ -84,10 +84,10 @@ LOG_LEVEL_MAP = {
 
 
 class CommandTypes(str, Enum):
-    AUTH = "Authentication Commands"
-    CORE = "Core Commands"
-    CRUD = "Create Update Delete Commands"
-    ACTION = "Kleinkram Action Commands"
+    AUTH = "认证命令"
+    CORE = "核心命令"
+    CRUD = "创建更新删除命令"
+    ACTION = "Kleinkram 执行命令"
 
 
 class OrderCommands(TyperGroup):
@@ -136,16 +136,16 @@ def login(
         "auto",
         "--oauth-provider",
         "-p",
-        help="OAuth provider to use for login. Supported providers: google, github, fake-oauth.",
+        help="用于登录的 OAuth 提供商。支持的提供商：google, github, fake-oauth。",
         show_default=True,
     ),
-    key: Optional[str] = typer.Option(None, help="CLI key"),
+    key: Optional[str] = typer.Option(None, help="CLI 密钥"),
     headless: bool = typer.Option(False),
     user: Optional[str] = typer.Option(
         None,
         "--user",
         "-u",
-        help="Auto-select user ID for fake-oauth (e.g., 1, 2, 3). Only works with fake-oauth provider.",
+        help="自动选择 fake-oauth 的用户 ID（例如 1, 2, 3）。仅适用于 fake-oauth 提供商。",
     ),
 ) -> None:
 
@@ -160,18 +160,18 @@ def login(
     # validate oAuthProvider
     if oAuthProvider not in ["google", "github", "fake-oauth"]:
         raise typer.BadParameter(
-            f"Unsupported OAuth provider '{oAuthProvider}'. Supported providers: google, github, fake-oauth."
+            f"不支持的 OAuth 提供商 '{oAuthProvider}'。支持的提供商：google, github, fake-oauth。"
         )
 
     # validate that user parameter is only used with fake-oauth
     if user is not None and oAuthProvider != "fake-oauth":
-        raise typer.BadParameter("--user parameter can only be used with fake-oauth provider")
+        raise typer.BadParameter("--user 参数仅适用于 fake-oauth 提供商")
 
     login_flow(oAuthProvider=oAuthProvider, key=key, headless=headless, user=user)
 
 
 @app.command(rich_help_panel=CommandTypes.AUTH)
-def logout(all: bool = typer.Option(False, help="logout on all enpoints")) -> None:
+def logout(all: bool = typer.Option(False, help="登出所有终端")) -> None:
     config = get_config()
     if all:
         config.endpoint_credentials.clear()
@@ -184,7 +184,7 @@ def logout(all: bool = typer.Option(False, help="logout on all enpoints")) -> No
 def claim():
     client = AuthenticatedClient()
     _claim_admin(client)
-    print("admin rights claimed successfully.")
+    print("管理员权限声明成功。")
 
 
 def _version_callback(value: bool) -> None:
@@ -200,37 +200,37 @@ def check_version_compatibility() -> None:
 
     if cli_version[0] != api_version[0]:
         raise InvalidCLIVersion(
-            f"You are using an unsupported CLI version ({__version__}). "
-            f"Please upgrade the CLI to version {api_vers_str} to continue using the CLI."
+            f"您使用的 CLI 版本 ({__version__}) 不受支持。"
+            f"请升级 CLI 至版本 {api_vers_str} 以继续使用。"
         )
 
     if cli_version[1] != api_version[1]:
         if cli_version < api_version:
-            msg = f"You are using an outdated CLI version ({__version__}). "
-            msg += f"Please consider upgrading the CLI to version {api_vers_str}."
+            msg = f"您使用的 CLI 版本 ({__version__}) 已过时。"
+            msg += f"请考虑升级 CLI 至版本 {api_vers_str}。"
             Console(file=sys.stderr).print(msg, style="red")
             logger.warning(msg)
         elif cli_version > api_version:
-            msg = f"You are using a CLI version ({__version__}) that is newer than the server version ({api_vers_str}). "
-            msg += "Please ask the admin to update the server."
+            msg = f"您使用的 CLI 版本 ({__version__}) 比服务器版本 ({api_vers_str}) 更新。"
+            msg += "请联系管理员更新服务器。"
             Console(file=sys.stderr).print(msg, style="yellow")
             logger.warning(msg)
 
 
 @app.callback()
 def cli(
-    verbose: bool = typer.Option(True, help="Enable verbose mode."),
-    debug: bool = typer.Option(True, help="Enable debug mode."),
+    verbose: bool = typer.Option(True, help="启用详细模式。"),
+    debug: bool = typer.Option(True, help="启用调试模式。"),
     version: Optional[bool] = typer.Option(None, "--version", "-v", callback=_version_callback),
-    log_level: Optional[LogLevel] = typer.Option(None, help="Set log level."),
+    log_level: Optional[LogLevel] = typer.Option(None, help="设置日志级别。"),
     max_lines: int = typer.Option(
         MAX_TABLE_SIZE,
         "--max-lines",
-        help="Maximum number of lines when pretty printing tables. -1 for unlimited.",
+        help="格式化打印表格时的最大行数，-1 表示无限制。",
     ),
 ):
     if not check_config_compatibility():
-        typer.confirm("found incompatible config file, overwrite?", abort=True)
+        typer.confirm("发现不兼容的配置文件，是否覆盖？", abort=True)
         save_config(Config())
 
     _ = version  # suppress unused variable warning
@@ -239,7 +239,7 @@ def cli(
     shared_state.debug = debug
 
     if max_lines < 0 and max_lines != -1:
-        raise typer.BadParameter("`--max-lines` must be -1 or positive")
+        raise typer.BadParameter("`--max-lines` 必须为 -1 或正数")
     shared_state.max_table_size = max_lines
 
     if shared_state.debug and log_level is None:
@@ -257,6 +257,6 @@ def cli(
         logger.error(format_traceback(e))
         raise
     except Exception:
-        err = "failed to check version compatibility"
+        err = "检查版本兼容性失败"
         Console(file=sys.stderr).print(err, style="yellow" if shared_state.verbose else None)
         logger.error(err)

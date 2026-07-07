@@ -19,7 +19,7 @@ from kleinkram.printing import print_projects
 from kleinkram.utils import split_args
 
 HELP = """\
-List projects, missions, or files.
+列出项目、任务或文件。
 """
 
 

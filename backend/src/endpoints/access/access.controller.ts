@@ -88,7 +88,7 @@ export class AccessController {
             .getAccessGroup(uuid, user.user.uuid)
             .catch((error: unknown) => {
                 if (error instanceof EntityNotFoundError) {
-                    throw new NotFoundException('AccessGroup not found');
+                    throw new NotFoundException('未找到权限组');
                 }
                 throw error;
             });
@@ -149,7 +149,7 @@ export class AccessController {
             )
             .catch((error: unknown) => {
                 if (error instanceof EntityNotFoundError) {
-                    throw new NotFoundException('AccessGroup not found');
+                    throw new NotFoundException('未找到权限组');
                 }
                 throw error;
             });

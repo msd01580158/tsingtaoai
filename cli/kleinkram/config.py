@@ -242,8 +242,8 @@ def check_config_compatibility(path: Path = CONFIG_PATH) -> bool:
 
 
 def endpoint_table(config: Config) -> Table:
-    table = Table(title="Available Endpoints")
-    table.add_column("Name", style="cyan")
+    table = Table(title="可用终端")
+    table.add_column("名称", style="cyan")
     table.add_column("API", style="cyan")
     table.add_column("S3", style="cyan")
 

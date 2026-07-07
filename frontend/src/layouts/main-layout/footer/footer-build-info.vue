@@ -5,7 +5,7 @@
         color="red"
     >
         <q-tooltip>
-            The API is running
+            API 版本
             {{ kleinkramVersion }}
         </q-tooltip>
     </q-icon>

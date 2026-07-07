@@ -116,8 +116,8 @@
                         style=""
                         :type="DataType_InputType[tagtype.datatype] || 'text'"
                         :options="[
-                            { label: 'True', value: true },
-                            { label: 'False', value: false },
+                            { label: '是', value: true },
+                            { label: '否', value: false },
                         ]"
                     />
                 </q-field>

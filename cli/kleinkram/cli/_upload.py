@@ -19,7 +19,7 @@ from kleinkram.utils import load_metadata
 from kleinkram.utils import split_args
 
 HELP = """\
-Upload files to kleinkram.
+上传文件到 Kleinkram。
 """
 
 upload_typer = typer.Typer(
@@ -50,33 +50,33 @@ def _handle_no_files_to_upload(original_count: int, uploaded_count: int) -> None
 
     if original_count > 0:
         typer.echo(
-            typer.style("All paths were skipped. No files to upload.", fg=typer.colors.RED),
+            typer.style("所有路径均被跳过，没有文件可上传。", fg=typer.colors.RED),
             err=True,
         )
     else:
-        typer.echo(typer.style("No files provided to upload.", fg=typer.colors.RED), err=True)
+        typer.echo(typer.style("未提供要上传的文件。", fg=typer.colors.RED), err=True)
     raise typer.Exit(code=1)
 
 
 @upload_typer.callback()
 def upload(
-    files: List[str] = typer.Argument(help="files to upload"),
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="project id or name"),
-    mission: str = typer.Option(..., "--mission", "-m", help="mission id or name"),
-    create: bool = typer.Option(False, help="create mission if it does not exist"),
-    metadata: Optional[str] = typer.Option(None, help="path to metadata file (json or yaml)"),
+    files: List[str] = typer.Argument(help="要上传的文件"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称"),
+    mission: str = typer.Option(..., "--mission", "-m", help="任务 ID 或名称"),
+    create: bool = typer.Option(False, help="如果任务不存在则创建"),
+    metadata: Optional[str] = typer.Option(None, help="元数据文件路径（json 或 yaml）"),
     fix_filenames: bool = typer.Option(
         False,
-        help="fix filenames before upload, this does not change the filenames locally",
+        help="上传前修复文件名（不会修改本地文件名）",
     ),
     skip: bool = typer.Option(
         False,
         "--skip",
         "-s",
-        help="skip unsupported file types, badly named files, or directories instead of erroring",
+        help="跳过不支持的文件类型、命名错误的文件或目录（而不是报错）",
     ),
-    experimental_datatypes: bool = typer.Option(False, help="allow experimental datatypes (yaml, svo2, db3, tum)"),
-    ignore_missing_tags: bool = typer.Option(False, help="ignore mission tags"),
+    experimental_datatypes: bool = typer.Option(False, help="允许实验性数据类型（yaml, svo2, db3, tum）"),
+    ignore_missing_tags: bool = typer.Option(False, help="忽略任务标签"),
 ) -> None:
     original_file_paths = [Path(file) for file in files]
     mission_query = _build_mission_query(mission, project)
@@ -105,7 +105,7 @@ def upload(
         )
         typer.echo(
             typer.style(
-                f"\nSuccessfully uploaded {len(files_to_upload)} file(s).",
+                f"\n成功上传了 {len(files_to_upload)} 个文件。",
                 fg=typer.colors.GREEN,
             )
         )
@@ -113,4 +113,4 @@ def upload(
     except MissionNotFound:
         if create:
             raise  # dont change the error message
-        raise MissionNotFound("Mission not found. Use `--create` to create it.")
+        raise MissionNotFound("未找到任务。请使用 `--create` 创建。")

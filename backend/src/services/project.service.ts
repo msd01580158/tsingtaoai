@@ -343,7 +343,7 @@ export class ProjectService {
         });
         if (exists) {
             throw new ConflictException(
-                'Project with that name already exists',
+                '已存在同名项目',
             );
         }
         const creator = await this.userService.findOneByUUID(
@@ -420,7 +420,7 @@ export class ProjectService {
                         );
                     } catch {
                         throw new BadRequestException(
-                            'Failed to set permissions. One or more user/group UUIDs may be invalid.',
+                            '设置权限失败。一个或多个用户/组的 UUID 可能无效。',
                         );
                     }
                 }
@@ -440,7 +440,7 @@ export class ProjectService {
         });
         if (exists) {
             throw new ConflictException(
-                'Project with that name already exists',
+                '已存在同名项目',
             );
         }
 
@@ -505,7 +505,7 @@ export class ProjectService {
                 if (missionCount > 0) {
                     throw new ConflictException(
                         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-                        `Project has ${missionCount} missions. Please delete them first.`,
+                        `项目包含 ${missionCount} 个任务，请先删除它们。`,
                     );
                 }
 
@@ -523,7 +523,7 @@ export class ProjectService {
                 // If no rows were affected, the project UUID didn't exist.
                 if (deleteResult.affected === 0) {
                     throw new NotFoundException(
-                        `Project with UUID ${uuid} not found.`,
+                        `未找到 UUID 为 ${uuid} 的项目。`,
                     );
                 }
             },
@@ -606,7 +606,7 @@ export class ProjectService {
                         });
                 } else {
                     throw new ConflictException(
-                        'Neither accessGroupUUID nor userUuid is present in accessGroup',
+                        '权限组中既未提供 accessGroupUUID 也未提供 userUuid',
                     );
                 }
                 const projectAccess = this.projectAccessRepository.create({

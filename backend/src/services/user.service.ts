@@ -80,7 +80,7 @@ export class UserService implements OnModuleInit {
             where: { role: UserRole.ADMIN },
         });
         if (nrAdmins > 0) {
-            throw new ForbiddenException('Admin already exists');
+            throw new ForbiddenException('管理员已存在');
         }
         const user = await this.userRepository.findOneOrFail({
             where: { uuid: auth.user.uuid },
@@ -194,7 +194,7 @@ export class UserService implements OnModuleInit {
     async getUserPermissions(userUuid: string): Promise<PermissionsDto> {
         // validate preconditions
         if (!userUuid) {
-            throw new Error('User UUID is required to get permissions');
+            throw new Error('需要用户 UUID 才能获取权限');
         }
 
         // Execute independent queries in parallel using Promise.all
@@ -219,7 +219,7 @@ export class UserService implements OnModuleInit {
         ]);
 
         if (!user) {
-            throw new Error(`User with UUID ${userUuid} not found`);
+            throw new Error(`未找到 UUID 为 ${userUuid} 的用户`);
         }
 
         // We check if the loaded memberships contain an AFFILIATION type

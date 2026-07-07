@@ -55,9 +55,9 @@ export class AuthService implements OnModuleInit {
         });
 
         if (account !== null && account.user === undefined) {
-            logger.error('Account exists but has no linked user!');
+            logger.error('账户存在但未关联用户！');
             throw new AuthFlowException(
-                'Account exists but has no linked user!',
+                '账户存在但未关联用户！',
             );
         }
 
@@ -91,9 +91,9 @@ export class AuthService implements OnModuleInit {
         });
 
         if (account !== null && account.user === undefined) {
-            logger.error('Account exists but has no linked user!');
+            logger.error('账户存在但未关联用户！');
             throw new AuthFlowException(
-                'Account exists but has no linked user!',
+                '账户存在但未关联用户！',
             );
         }
 
@@ -120,9 +120,9 @@ export class AuthService implements OnModuleInit {
         });
 
         if (account !== null && account.user === undefined) {
-            logger.error('Account exists but has no linked user!');
+            logger.error('账户存在但未关联用户！');
             throw new AuthFlowException(
-                'Account exists but has no linked user!',
+                '账户存在但未关联用户！',
             );
         }
 
@@ -223,7 +223,7 @@ export const createNewUser = async (
     // assert that we don't have a user with the same email but a different provider
     if (!!existingUser && existingUser.account) {
         throw new AuthFlowException(
-            'User already exists and has a linked account! Please use a different OAuth provider.',
+            '用户已存在且已关联账户！请使用其他 OAuth 提供商。',
         );
     }
 

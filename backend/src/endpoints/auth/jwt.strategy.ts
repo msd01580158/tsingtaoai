@@ -8,7 +8,7 @@ import { UserService } from '../../services/user.service';
 
 export class InvalidJwtTokenException extends Error {
     constructor() {
-        super('Invalid JWT token');
+        super('无效的 JWT 令牌');
     }
 }
 

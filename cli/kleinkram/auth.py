@@ -16,7 +16,7 @@ from kleinkram.config import save_config
 DEFAULT_CALLBACK_PORT = 8000
 CLI_CALLBACK_ENDPOINT = "/cli/callback"
 OAUTH_SLUG = "/auth/"
-AUTH_TOKEN_FETCH_ERROR = "Failed to fetch authentication tokens."
+AUTH_TOKEN_FETCH_ERROR = "获取认证令牌失败。"
 
 
 def _has_browser() -> bool:
@@ -29,18 +29,18 @@ def _has_browser() -> bool:
 
 def _headless_auth(*, url: str) -> None:
 
-    print(f"please open the following URL manually to authenticate: {url}")
-    print("enter the authentication token provided after logging in:")
-    auth_token = getpass("authentication token: ")
-    refresh_token = getpass("refresh token: ")
+    print(f"请手动打开以下 URL 进行认证：{url}")
+    print("输入登录后获取的认证令牌：")
+    auth_token = getpass("认证令牌：")
+    refresh_token = getpass("刷新令牌：")
 
     if auth_token and refresh_token:
         config = get_config()
         config.credentials = Credentials(auth_token=auth_token, refresh_token=refresh_token)
         save_config(config)
-        print(f"Authentication complete. Tokens saved to {CONFIG_PATH}.")
+        print(f"认证完成。令牌已保存至 {CONFIG_PATH}。")
     else:
-        raise ValueError("Please provided tokens.")
+        raise ValueError("请提供令牌。")
 
 
 class OAuthCallbackHandler(BaseHTTPRequestHandler):
@@ -49,7 +49,7 @@ class OAuthCallbackHandler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header("Content-type", "text/plain")
             self.end_headers()
-            self.wfile.write(b"Invalid path")
+            self.wfile.write(b"无效路径")
             return
 
         query = urllib.parse.urlparse(self.path).query
@@ -77,7 +77,7 @@ class OAuthCallbackHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/html")
         self.end_headers()
-        self.wfile.write(b"Authentication successful. You can close this window.")
+        self.wfile.write(b"认证成功，您可以关闭此窗口。")
 
     def log_message(self, *args, **kwargs):
         _ = args, kwargs
@@ -106,8 +106,8 @@ def _browser_auth(*, url: str, server: HTTPServer) -> None:
         server.server_close()
 
     if not server.auth_completed:
-        raise RuntimeError("Authentication timed out or failed. Please try again.")
-    print(f"Authentication complete. Tokens saved to {CONFIG_PATH}.")
+        raise RuntimeError("认证超时或失败，请重试。")
+    print(f"认证完成。令牌已保存至 {CONFIG_PATH}。")
 
 
 def _create_callback_server(preferred_port: int = DEFAULT_CALLBACK_PORT) -> tuple[HTTPServer, int]:
@@ -126,7 +126,7 @@ def _direct_oauth_auth(*, endpoint: str, provider: str, user: str) -> None:
     """
     import requests
 
-    print(f"Authenticating as user {user} with {provider}...")
+    print(f"正在使用 {provider} 以用户 {user} 身份认证...")
 
     try:
         # Step 1: Get the authorization code from fake OAuth
@@ -146,24 +146,24 @@ def _direct_oauth_auth(*, endpoint: str, provider: str, user: str) -> None:
         response = requests.get(fake_oauth_url, params=params, allow_redirects=False)
 
         if response.status_code not in [301, 302, 303, 307, 308]:
-            raise RuntimeError(f"Expected redirect from OAuth provider, got {response.status_code}")
+            raise RuntimeError(f"预期收到 OAuth 提供商的重定向，但收到状态码 {response.status_code}")
 
         # Extract the redirect location
         location = response.headers.get("Location")
         if not location:
-            raise RuntimeError("No redirect location from OAuth provider")
+            raise RuntimeError("未收到 OAuth 提供商的重定向地址")
 
         # Parse the callback URL to extract the auth code
         parsed = urllib.parse.urlparse(location)
         query_params = urllib.parse.parse_qs(parsed.query)
 
         if "code" not in query_params:
-            raise RuntimeError(f"No authorization code in redirect: {location}")
+            raise RuntimeError(f"重定向中无授权码：{location}")
 
         auth_code = query_params["code"][0]
         state = query_params.get("state", [None])[0]
 
-        print("Received authorization code, exchanging for tokens...")
+        print("已收到授权码，正在交换令牌...")
 
         # Step 2: Exchange the code for tokens by calling the backend callback
         # Use a session to preserve cookies
@@ -176,23 +176,23 @@ def _direct_oauth_auth(*, endpoint: str, provider: str, user: str) -> None:
 
         # The backend should set cookies and redirect
         if callback_response.status_code not in [301, 302, 303, 307, 308]:
-            raise RuntimeError(f"Expected redirect from callback, got {callback_response.status_code}")
+            raise RuntimeError(f"预期收到回调的重定向，但收到状态码 {callback_response.status_code}")
 
         # Extract tokens from cookies
         auth_token = session.cookies.get("authtoken")
         refresh_token = session.cookies.get("refreshtoken")
 
         if not auth_token or not refresh_token:
-            raise RuntimeError("Failed to get tokens from callback response")
+            raise RuntimeError("从回调响应获取令牌失败")
 
         # Save tokens
         config = get_config()
         config.credentials = Credentials(auth_token=auth_token, refresh_token=refresh_token)
         save_config(config)
-        print(f"Authentication complete. Tokens saved to {CONFIG_PATH}.")
+        print(f"认证完成。令牌已保存至 {CONFIG_PATH}。")
 
     except requests.RequestException as e:
-        raise RuntimeError(f"OAuth flow failed: {e}")
+        raise RuntimeError(f"OAuth 流程失败：{e}")
 
 
 def login_flow(

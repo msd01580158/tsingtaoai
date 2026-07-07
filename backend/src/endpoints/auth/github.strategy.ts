@@ -43,7 +43,7 @@ export class GitHubStrategy extends PassportStrategy(Strategy, 'github') {
         if (provider !== Providers.GITHUB) {
             logger.error('Invalid provider, expected github but got', provider);
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-            callback(new AuthFlowException('Invalid provider!'));
+            callback(new AuthFlowException('无效的提供商！'));
             return;
         }
 

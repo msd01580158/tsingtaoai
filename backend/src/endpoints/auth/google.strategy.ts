@@ -40,7 +40,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
         // currently only google is supported
         if (provider !== Providers.GOOGLE) {
             logger.error('Invalid provider, expected google but got', provider);
-            callback(new AuthFlowException('Invalid provider!'));
+            callback(new AuthFlowException('无效的提供商！'));
             return;
         }
 

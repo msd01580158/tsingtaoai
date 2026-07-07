@@ -47,7 +47,7 @@ export function logout() {
                 globalThis.location.reload();
             })
             .catch(() => {
-                reject(new Error('Failed to logout'));
+                reject(new Error('退出登录失败'));
             });
     });
 }

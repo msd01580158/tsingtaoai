@@ -18,7 +18,7 @@ from kleinkram.utils import split_args
 logger = logging.getLogger(__name__)
 
 HELP = """\
-Download files from kleinkram.
+从 Kleinkram 下载文件。
 """
 
 
@@ -27,52 +27,52 @@ download_typer = typer.Typer(name="download", no_args_is_help=True, invoke_witho
 
 @download_typer.callback()
 def download(
-    files: Optional[List[str]] = typer.Argument(None, help="file names, ids or patterns"),
-    projects: Optional[List[str]] = typer.Option(None, "--project", "-p", help="project names, ids or patterns"),
-    missions: Optional[List[str]] = typer.Option(None, "--mission", "-m", help="mission names, ids or patterns"),
-    dest: str = typer.Option(prompt="destination", help="local path to save the files"),
-    nested: bool = typer.Option(False, help="save files in nested directories, project-name/mission-name"),
+    files: Optional[List[str]] = typer.Argument(None, help="文件名、ID 或模式"),
+    projects: Optional[List[str]] = typer.Option(None, "--project", "-p", help="项目名称、ID 或模式"),
+    missions: Optional[List[str]] = typer.Option(None, "--mission", "-m", help="任务名称、ID 或模式"),
+    dest: str = typer.Option(prompt="目标路径", help="保存文件的本地路径"),
+    nested: bool = typer.Option(False, help="按项目名称/任务名称嵌套目录保存文件"),
     overwrite: bool = typer.Option(
         False,
-        help="overwrite files if they already exist and don't match the file size or file hash",
+        help="若文件已存在且大小或哈希不匹配则覆盖",
     ),
     include_corrupt_files: bool = typer.Option(
         False,
-        help="download files marked as CORRUPTED (potentially dangerous, use with caution)",
+        help="下载标记为损坏的文件（可能有风险，请谨慎使用）",
     ),
     yes: bool = typer.Option(
         False,
         "--yes",
         "-y",
-        help="skip all confirmation prompts",
+        help="跳过所有确认提示",
     ),
     allow_corrupt: bool = typer.Option(
         False,
         "--allow-corrupt",
-        help="skip confirmation prompt for downloading files marked as CORRUPTED",
+        help="跳过下载损坏文件的确认提示",
     ),
     create_dirs: bool = typer.Option(
         False,
         "--create-dirs",
-        help="create missing destination directories without prompting",
+        help="自动创建缺失的目标目录（无需确认）",
     ),
 ) -> None:
     if include_corrupt_files:
         typer.secho(
-            "Warning: --include-corrupt-files enables downloading files marked as CORRUPTED. "
-            "These files may be harmful. Do not execute or open them blindly.",
+            "警告：--include-corrupt-files 会下载标记为损坏的文件。"
+            "这些文件可能有害，请勿盲目执行或打开。",
             fg=typer.colors.YELLOW,
             err=True,
         )
         if not (yes or allow_corrupt):
-            typer.confirm("Do you want to continue? You can use --yes or --allow-corrupt to skip this prompt.", abort=True)
+            typer.confirm("是否继续？可使用 --yes 或 --allow-corrupt 跳过此提示。", abort=True)
 
     # create destination directory
     dest_dir = Path(dest)
     if not dest_dir.exists():
         if not (yes or create_dirs):
             typer.confirm(
-                f"Destination {dest_dir} does not exist. Create it? You can use --yes or --create-dirs to skip this prompt.",
+                f"目标路径 {dest_dir} 不存在，是否创建？可使用 --yes 或 --create-dirs 跳过此提示。",
                 abort=True,
             )
     dest_dir.mkdir(parents=True, exist_ok=True)

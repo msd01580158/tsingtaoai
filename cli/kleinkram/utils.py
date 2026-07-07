@@ -104,14 +104,14 @@ def check_file_paths(files: Sequence[Path]) -> None:
 
 def check_file_path(file: Path) -> None:
     if file.is_dir():
-        raise FileNotFoundError(f"{file} is a directory and not a file")
+        raise FileNotFoundError(f"{file} 是目录而非文件")
     if not file.exists():
-        raise FileNotFoundError(f"{file} does not exist")
+        raise FileNotFoundError(f"{file} 不存在")
     if file.suffix not in SUPPORT_FILE_TYPES:
-        raise FileTypeNotSupported(f"only {', '.join(SUPPORT_FILE_TYPES)} files are supported: {file}")
+        raise FileTypeNotSupported(f"仅支持 {', '.join(SUPPORT_FILE_TYPES)} 格式的文件：{file}")
     if not check_filename_is_sanatized(file.stem):
         raise FileNameNotSupported(
-            f"only `{''.join(INTERNAL_ALLOWED_CHARS)}` are " f"allowed in filenames and at most 50chars: {file}"
+            f"文件名仅允许使用 `{''.join(INTERNAL_ALLOWED_CHARS)}` 这些字符，且最多 50 个字符：{file}"
         )
 
 
@@ -207,12 +207,12 @@ def b64_md5(file: Path) -> str:
 
 def load_metadata(path: Path) -> Dict[str, str]:
     if not path.exists():
-        raise FileNotFoundError(f"metadata file not found: {path}")
+        raise FileNotFoundError(f"未找到元数据文件：{path}")
     try:
         with path.open() as f:
             return {str(k): str(v) for k, v in yaml.safe_load(f).items()}
     except Exception as e:
-        raise ValueError(f"could not parse metadata file: {e}")
+        raise ValueError(f"无法解析元数据文件：{e}")
 
 
 def get_supported_api_version() -> Tuple[int, int, int]:

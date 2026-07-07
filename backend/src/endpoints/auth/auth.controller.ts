@@ -126,7 +126,7 @@ export class AuthController {
             response.status(200).send(`
         <html>
         <head>
-            <title>Authentication Successful</title>
+            <title>认证成功</title>
             <style>
                 body { font-family: Arial, sans-serif; padding: 40px; line-height: 1.6; }
                 .token { background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; word-wrap: break-word; }
@@ -137,16 +137,16 @@ export class AuthController {
             </style>
         </head>
         <body>
-            <h1>Authentication Successful</h1>
-            <p>Please copy your tokens from below and paste them back into your application.</p>
+            <h1>认证成功</h1>
+            <p>请从下方复制您的令牌并粘贴回应用程序。</p>
 
-            <h2>Authentication Token</h2>
+            <h2>认证令牌</h2>
             <div class="token" id="authToken">${authToken}</div>
-            <button onclick="copyToClipboard('authToken')">Copy Authentication Token</button>
+            <button onclick="copyToClipboard('authToken')">复制认证令牌</button>
 
-            <h2>Refresh Token</h2>
+            <h2>刷新令牌</h2>
             <div class="token" id="refreshToken">${refreshToken}</div>
-            <button onclick="copyToClipboard('refreshToken')">Copy Refresh Token</button>
+            <button onclick="copyToClipboard('refreshToken')">复制刷新令牌</button>
 
             <script>
                 function copyToClipboard(elementId) {
@@ -188,7 +188,7 @@ export class AuthController {
     @OutputDto(null) // TODO: type API response
     validateToken(@Res() response: Response): void {
         // If we reach here, the token is valid
-        response.status(200).json({ message: 'Token is valid' });
+        response.status(200).json({ message: '令牌有效' });
     }
 
     @Post('refresh-token')
@@ -199,7 +199,7 @@ export class AuthController {
         if (!refreshToken) {
             return response
                 .status(401)
-                .json({ message: 'Refresh token not found' });
+                .json({ message: '未找到刷新令牌' });
         }
 
         try {
@@ -219,7 +219,7 @@ export class AuthController {
             if (!user) {
                 return response
                     .status(401)
-                    .json({ message: 'Invalid refresh token' });
+                    .json({ message: '无效的刷新令牌' });
             }
 
             const newAuthToken = this.jwtService.sign(
@@ -231,7 +231,7 @@ export class AuthController {
                 secure: env.DEV,
                 sameSite: 'strict',
             });
-            return response.status(200).json({ message: 'Token refreshed' });
+            return response.status(200).json({ message: '令牌已刷新' });
         } catch {
             throw InvalidJwtTokenException;
         }
@@ -250,6 +250,6 @@ export class AuthController {
             expires: new Date(0),
             secure: true,
         });
-        response.status(200).json({ message: 'Logged out' });
+        response.status(200).json({ message: '已退出登录' });
     }
 }

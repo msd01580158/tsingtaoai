@@ -18,12 +18,12 @@ from kleinkram.printing import print_mission_info
 from kleinkram.utils import load_metadata
 from kleinkram.utils import split_args
 
-CREATE_HELP = "create a mission"
-UPDATE_HELP = "update a mission"
-DELETE_HELP = "delete a mission"
-INFO_HELP = "get information about a mission"
+CREATE_HELP = "创建任务"
+UPDATE_HELP = "更新任务"
+DELETE_HELP = "删除任务"
+INFO_HELP = "获取任务信息"
 NOT_IMPLEMENTED_YET = """\
-Not implemented yet, open an issue if you want specific functionality
+尚未实现，如有特定功能需求请提交 Issue
 """
 
 mission_typer = typer.Typer(no_args_is_help=True, context_settings={"help_option_names": ["-h", "--help"]})
@@ -31,10 +31,10 @@ mission_typer = typer.Typer(no_args_is_help=True, context_settings={"help_option
 
 @mission_typer.command(help=CREATE_HELP)
 def create(
-    project: str = typer.Option(..., "--project", "-p", help="project id or name"),
-    mission_name: str = typer.Option(..., "--mission", "-m", help="mission name"),
-    metadata: Optional[str] = typer.Option(None, help="path to metadata file (json or yaml)"),
-    ignore_missing_tags: bool = typer.Option(False, help="ignore mission tags"),
+    project: str = typer.Option(..., "--project", "-p", help="项目 ID 或名称"),
+    mission_name: str = typer.Option(..., "--mission", "-m", help="任务名称"),
+    metadata: Optional[str] = typer.Option(None, help="元数据文件路径（json 或 yaml）"),
+    ignore_missing_tags: bool = typer.Option(False, help="忽略任务标签"),
 ) -> None:
     project_ids, project_patterns = split_args([project] if project else [])
     project_query = ProjectQuery(ids=project_ids, patterns=project_patterns)
@@ -60,8 +60,8 @@ def create(
 
 @mission_typer.command(help=INFO_HELP)
 def info(
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="project id or name"),
-    mission: str = typer.Option(..., "--mission", "-m", help="mission id or name"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称"),
+    mission: str = typer.Option(..., "--mission", "-m", help="任务 ID 或名称"),
 ) -> None:
     mission_ids, mission_patterns = split_args([mission])
     project_ids, project_patterns = split_args([project] if project else [])
@@ -80,9 +80,9 @@ def info(
 
 @mission_typer.command(help=UPDATE_HELP)
 def update(
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="project id or name"),
-    mission: str = typer.Option(..., "--mission", "-m", help="mission id or name"),
-    metadata: str = typer.Option(help="path to metadata file (json or yaml)"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称"),
+    mission: str = typer.Option(..., "--mission", "-m", help="任务 ID 或名称"),
+    metadata: str = typer.Option(help="元数据文件路径（json 或 yaml）"),
 ) -> None:
     mission_ids, mission_patterns = split_args([mission])
     project_ids, project_patterns = split_args([project] if project else [])
@@ -106,9 +106,9 @@ def update(
 
 @mission_typer.command(help=DELETE_HELP)
 def delete(
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="project id or name"),
-    mission: str = typer.Option(..., "--mission", "-m", help="mission id or name"),
-    confirm: bool = typer.Option(False, "--confirm", "-y", "--yes", help="confirm deletion"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称"),
+    mission: str = typer.Option(..., "--mission", "-m", help="任务 ID 或名称"),
+    confirm: bool = typer.Option(False, "--confirm", "-y", "--yes", help="确认删除"),
 ) -> None:
     project_ids, project_patterns = split_args([project] if project else [])
     project_query = ProjectQuery(ids=project_ids, patterns=project_patterns)
@@ -121,29 +121,29 @@ def delete(
     )
     if mission_patterns and not (project_patterns or project_ids):
         raise InvalidMissionQuery(
-            "Mission query does not uniquely determine mission. "
-            "Project name or id must be specified when deleting by mission name"
+            "任务查询无法唯一确定任务。"
+            "按任务名称删除时必须指定项目名称或 ID"
         )
 
     client = AuthenticatedClient()
     mission_parsed = get_mission(client, mission_query)
     if not confirm:
         if project:
-            typer.confirm(f"delete {project} {mission}", abort=True)
+            typer.confirm(f"删除 {project} {mission}", abort=True)
         else:
-            typer.confirm(f"delete {mission_parsed.name} {mission}", abort=True)
+            typer.confirm(f"删除 {mission_parsed.name} {mission}", abort=True)
 
     kleinkram.core.delete_mission(client=client, mission_id=mission_parsed.id)
 
 
 @mission_typer.command(help=NOT_IMPLEMENTED_YET)
 def prune(
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="project id or name"),
-    mission: str = typer.Option(..., "--mission", "-m", help="mission id or name"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称"),
+    mission: str = typer.Option(..., "--mission", "-m", help="任务 ID 或名称"),
 ) -> None:
     """\
-    delete files with bad file states, e.g. missing not uploaded corrupted etc.
+    删除状态异常的文件，如缺失、未上传、损坏等
     TODO: open for suggestions what this should do
     """
 
-    raise NotImplementedError("Not implemented yet")
+    raise NotImplementedError("尚未实现")

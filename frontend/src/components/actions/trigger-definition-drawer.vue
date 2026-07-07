@@ -344,8 +344,8 @@ const localProjectUuid = ref<string | undefined>(undefined);
 
 const triggerTypeOptions = [
     { label: 'Webhook', value: TriggerType.WEBHOOK },
-    { label: 'Time Schedule (Cron)', value: TriggerType.TIME },
-    { label: 'File Watcher', value: TriggerType.FILE },
+    { label: '定时调度 (Cron)', value: TriggerType.TIME },
+    { label: '文件监视', value: TriggerType.FILE },
 ];
 
 // Computed

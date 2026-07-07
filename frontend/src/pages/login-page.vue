@@ -48,7 +48,7 @@
                             line-height: 36px;
                         "
                     >
-                        Login to Kleinkram
+                        登录 Kleinkram
                     </h1>
 
                     <!-- Loading state -->
@@ -72,15 +72,13 @@
                         "
                     >
                         <div style="font-weight: 500; margin-bottom: 8px">
-                            Backend Unavailable
+                            后端不可用
                         </div>
                         <div style="font-size: 14px">
-                            The authentication backend is currently unavailable.
-                            Please try again later or contact your system
-                            administrator.
+                            认证后端暂时不可用，请稍后重试或联系系统管理员。
                         </div>
                         <q-btn
-                            label="Retry Connection"
+                            label="重新连接"
                             color="warning"
                             flat
                             class="q-mt-sm full-width"
@@ -96,7 +94,7 @@
                                 flat
                                 outline
                                 size="md"
-                                label="Dev Login (Fake OAuth)"
+                                label="开发者登录（模拟 OAuth）"
                                 @click="loginWithFakeOAuth"
                             />
                         </template>
@@ -107,7 +105,7 @@
                             flat
                             outline
                             size="md"
-                            label="Login with Google"
+                            label="使用 Google 登录"
                             @click="loginWithGoogle"
                         />
 
@@ -117,7 +115,7 @@
                             flat
                             outline
                             size="md"
-                            label="Login with GitHub"
+                            label="使用 GitHub 登录"
                             @click="loginWithGitHub"
                         />
                     </template>

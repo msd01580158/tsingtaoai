@@ -7,7 +7,7 @@
             >
                 <div class="flex" style="gap: 8px">
                     <span>
-                        © {{ year }} TsingtaoAI - Robotic Systems Lab (RSL)
+                        © {{ year }} TsingtaoAI - 机器人系统实验室 (RSL)
                     </span>
                     <footer-separator />
                     <footer-build-info />

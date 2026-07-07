@@ -175,15 +175,15 @@ const currentUser = ref<CurrentAPIUserDto | null>(null);
 
 // Columns
 const columns: QTableColumn[] = [
-    { name: 'name', label: 'Trigger Name', field: 'name', align: 'left' },
-    { name: 'type', label: 'Type', field: 'type', align: 'left' },
+    { name: 'name', label: '触发器名称', field: 'name', align: 'left' },
+    { name: 'type', label: '类型', field: 'type', align: 'left' },
     {
         name: 'template',
-        label: 'Target Action Template',
+        label: '目标执行模板',
         field: (row: ActionTriggerDto) => row.templateName ?? row.templateUuid,
         align: 'left',
     },
-    { name: 'creator', label: 'Creator', field: 'creatorName', align: 'left' },
+    { name: 'creator', label: '创建者', field: 'creatorName', align: 'left' },
     { name: 'actions', label: '', field: 'actions', align: 'right' },
 ];
 

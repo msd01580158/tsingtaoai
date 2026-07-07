@@ -83,10 +83,10 @@
             <div class="empty-state-content">
                 <q-icon name="sym_o_box" size="lg" color="grey-6" />
                 <span class="text-h6 text-grey-7 q-mt-md">
-                    No recent projects
+                    暂无最近项目
                 </span>
                 <span class="text-body1 text-grey-6 q-mt-sm">
-                    Your recently used projects will appear here.
+                    您最近使用的项目将显示在此处。
                 </span>
             </div>
         </div>

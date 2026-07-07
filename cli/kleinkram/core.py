@@ -152,8 +152,8 @@ def verify(
     # add deprecated warning for skip_hash
     if skip_hash is not None:
         print(
-            "Warning: --skip-hash is deprecated and will be removed in a future version. "
-            "Use --check-file-hash=False instead.",
+            "警告：--skip-hash 已弃用，将在未来版本中移除。"
+            "请改用 --check-file-hash=False。",
         )
         check_file_hash = not skip_hash
 
@@ -170,7 +170,7 @@ def verify(
     file_status: Dict[Path, FileVerificationStatus] = {}
     for name, file in tqdm(
         filename_map.items(),
-        desc="verifying files",
+        desc="正在验证文件",
         unit="file",
         disable=not verbose,
     ):

@@ -23,10 +23,10 @@ from kleinkram.printing import print_runs_table
 from kleinkram.utils import split_args
 
 HELP = """\
-Manage and inspect action runs.
+管理和查看执行记录。
 
-You can list action runs, get detailed information about specific runs, stream their logs,
-cancel runs in progress, and retry failed runs.
+您可以列出执行记录，获取特定运行的详细信息，流式查看其日志，
+取消正在进行的运行，以及重试失败的运行。
 """
 
 run_typer = typer.Typer(
@@ -35,18 +35,18 @@ run_typer = typer.Typer(
     help=HELP,
 )
 
-LIST_HELP = "List action runs. Optionally filter by mission or project."
-INFO_HELP = "Get detailed information about a specific action run."
-LOGS_HELP = "Stream the logs for a specific action run."
-CANCEL_HELP = "Cancel an action run that is in progress."
-RETRY_HELP = "Retry a failed action run."
-DOWNLOAD_HELP = "Download artifacts for a specific action run."
+LIST_HELP = "列出执行记录。可按任务或项目筛选。"
+INFO_HELP = "获取指定执行运行的详细信息。"
+LOGS_HELP = "流式查看指定执行运行的日志。"
+CANCEL_HELP = "取消正在进行的执行运行。"
+RETRY_HELP = "重试失败的执行运行。"
+DOWNLOAD_HELP = "下载指定执行运行的产出物。"
 
 
 @run_typer.command(help=LIST_HELP, name="list")
 def list_runs(
-    mission: Optional[str] = typer.Option(None, "--mission", "-m", help="Mission ID or name to filter by."),
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="Project ID or name to filter by."),
+    mission: Optional[str] = typer.Option(None, "--mission", "-m", help="按任务 ID 或名称筛选。"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="按项目 ID 或名称筛选。"),
 ) -> None:
     """
     List action runs.
@@ -68,7 +68,7 @@ def list_runs(
 
 
 @run_typer.command(name="info", help=INFO_HELP)
-def get_info(run_id: str = typer.Argument(..., help="The ID of the run to get information for.")) -> None:
+def get_info(run_id: str = typer.Argument(..., help="要获取信息的运行 ID。")) -> None:
     """
     Get detailed information for a single run.
     """
@@ -79,8 +79,8 @@ def get_info(run_id: str = typer.Argument(..., help="The ID of the run to get in
 
 @run_typer.command(help=LOGS_HELP)
 def logs(
-    run_id: str = typer.Argument(..., help="The ID of the run to fetch logs for."),
-    follow: bool = typer.Option(False, "--follow", "-f", help="Follow the log output in real-time."),
+    run_id: str = typer.Argument(..., help="要获取日志的运行 ID。"),
+    follow: bool = typer.Option(False, "--follow", "-f", help="实时跟踪日志输出。"),
 ) -> None:
     """
     Fetch and display logs for a specific run.
@@ -88,7 +88,7 @@ def logs(
     client = AuthenticatedClient()
 
     if follow:
-        typer.echo(f"Watching logs for run {run_id}. Press Ctrl+C to stop.")
+        typer.echo(f"正在查看运行 {run_id} 的日志。按 Ctrl+C 停止。")
         try:
 
             # TODO: fine for now, but ideally we would have a streaming endpoint
@@ -106,7 +106,7 @@ def logs(
                 time.sleep(2)
 
         except KeyboardInterrupt:
-            typer.echo("Stopped following logs.")
+            typer.echo("已停止跟踪日志。")
             sys.exit(0)
     else:
         log_entries = kleinkram.api.routes.get_run(client, run_id=run_id).logs
@@ -125,13 +125,13 @@ def _get_filename_from_cd(cd: str) -> Optional[str]:
 
 @run_typer.command(name="download", help=DOWNLOAD_HELP)
 def download_artifacts(
-    run_id: str = typer.Argument(..., help="The ID of the run to download artifacts for."),
-    output: Optional[str] = typer.Option(None, "--output", "-o", help="Path or filename to save the artifacts to."),
+    run_id: str = typer.Argument(..., help="要下载产出物的运行 ID。"),
+    output: Optional[str] = typer.Option(None, "--output", "-o", help="保存产出物的路径或文件名。"),
     extract: bool = typer.Option(
         False,
         "--extract",
         "-x",
-        help="Automatically extract the archive after downloading.",
+        help="下载后自动解压归档文件。",
     ),
 ) -> None:
     """
@@ -143,17 +143,17 @@ def download_artifacts(
     try:
         run: Run = kleinkram.api.routes.get_run(client, run_id=run_id)
     except Exception as e:
-        typer.secho(f"Failed to fetch run details: {e}", fg=typer.colors.RED)
+        typer.secho(f"获取运行详情失败：{e}", fg=typer.colors.RED)
         raise typer.Exit(1)
 
     if not run.artifact_url:
         typer.secho(
-            f"No artifacts found for run {run_id}. The run might not be finished or artifacts expired.",
+            f"未找到运行 {run_id} 的产出物。该运行可能尚未完成或产出物已过期。",
             fg=typer.colors.YELLOW,
         )
         raise typer.Exit(1)
 
-    typer.echo(f"Downloading artifacts for run {run_id}...")
+    typer.echo(f"正在下载运行 {run_id} 的产出物...")
 
     # Stream Download
     try:
@@ -179,13 +179,13 @@ def download_artifacts(
 
             # Write to file with Progress Bar
             with open(filename, "wb") as f:
-                with typer.progressbar(length=total_length, label=f"Saving to {filename}") as progress:
+                with typer.progressbar(length=total_length, label=f"保存至 {filename}") as progress:
                     for chunk in r.iter_content(chunk_size=8192):
                         if chunk:
                             f.write(chunk)
                             progress.update(len(chunk))
 
-            typer.secho(f"\nSuccessfully downloaded to {filename}", fg=typer.colors.GREEN)
+            typer.secho(f"\n成功下载至 {filename}", fg=typer.colors.GREEN)
 
             # Extraction Logic
             if extract:
@@ -199,7 +199,7 @@ def download_artifacts(
                     parent_dir = os.path.dirname(os.path.abspath(filename))
                     extract_path = os.path.join(parent_dir, folder_name)
 
-                    typer.echo(f"Extracting to: {extract_path}...")
+                    typer.echo(f"正在解压至：{extract_path}...")
 
                     with tarfile.open(filename, "r:gz") as tar:
 
@@ -210,11 +210,11 @@ def download_artifacts(
                         else:
                             tar.extractall(path=extract_path)
 
-                    typer.secho("Successfully extracted.", fg=typer.colors.GREEN)
+                    typer.secho("解压成功。", fg=typer.colors.GREEN)
 
                 except tarfile.TarError as e:
-                    typer.secho(f"Failed to extract archive: {e}", fg=typer.colors.RED)
+                    typer.secho(f"解压归档文件失败：{e}", fg=typer.colors.RED)
 
     except requests.exceptions.RequestException as e:
-        typer.secho(f"Error downloading file: {e}", fg=typer.colors.RED)
+        typer.secho(f"下载文件时出错：{e}", fg=typer.colors.RED)
         raise typer.Exit(1)

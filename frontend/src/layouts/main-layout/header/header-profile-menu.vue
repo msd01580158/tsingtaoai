@@ -45,7 +45,7 @@
                             />
                         </q-item-section>
                         <q-item-section>
-                            <q-item-label>Log out</q-item-label>
+                            <q-item-label>退出登录</q-item-label>
                         </q-item-section>
                     </q-item>
                 </q-list>

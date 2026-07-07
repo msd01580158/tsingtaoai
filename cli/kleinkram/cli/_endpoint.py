@@ -18,10 +18,10 @@ from kleinkram.config import get_config
 from kleinkram.config import select_endpoint
 
 HELP = """\
-Switch between different Kleinkram hosting.
+在不同的 Kleinkram 托管服务器之间切换。
 
-The endpoint is used to determine the API server to connect to\
-(default is the API server of https://datasets.leggedrobotics.com).
+终端地址用于确定要连接的 API 服务器\
+（默认为 https://datasets.leggedrobotics.com 的 API 服务器）。
 """
 
 endpoint_typer = typer.Typer(
@@ -34,9 +34,9 @@ endpoint_typer = typer.Typer(
 
 @endpoint_typer.callback()
 def endpoint(
-    name: Optional[str] = typer.Argument(None, help="Name of the endpoint to use"),
-    api: Optional[str] = typer.Argument(None, help="API endpoint to use"),
-    s3: Optional[str] = typer.Argument(None, help="S3 endpoint to use"),
+    name: Optional[str] = typer.Argument(None, help="要使用的终端名称"),
+    api: Optional[str] = typer.Argument(None, help="要使用的 API 终端地址"),
+    s3: Optional[str] = typer.Argument(None, help="要使用的 S3 终端地址"),
 ) -> None:
     config = get_config()
     console = Console()
@@ -47,10 +47,10 @@ def endpoint(
         try:
             select_endpoint(config, name)
         except ValueError:
-            console.print(f"Endpoint {name} not found.\n", style="red")
+            console.print(f"未找到终端 {name}。\n", style="red")
             console.print(endpoint_table(config))
     elif not (name and api and s3):
-        raise typer.BadParameter("to add a new endpoint you must specify the api and s3 endpoints")
+        raise typer.BadParameter("要添加新终端，必须同时指定 api 和 s3 终端地址")
     else:
         new_endpoint = Endpoint(name, api, s3)
         add_endpoint(config, new_endpoint)

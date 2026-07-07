@@ -87,7 +87,7 @@ export class MissionService {
                     .map((tagType: TagTypeEntity) => tagType.name)
                     .join(', ');
                 throw new ConflictException(
-                    `All required tags must be provided for the mission. Missing tags: ${
+                    `任务必须提供所有必需的标签。缺少的标签：${
                         missingTagNames
                     }`,
                 );
@@ -107,7 +107,7 @@ export class MissionService {
         });
         if (exists) {
             throw new ConflictException(
-                `Mission with that name already exists in the project '${project.name}'`,
+                `该项目中已存在同名任务 '${project.name}'`,
             );
         }
 
@@ -417,7 +417,7 @@ export class MissionService {
             where: { uuid: projectUUID },
         });
         if (!projectExists) {
-            throw new ConflictException('Target project not found');
+            throw new ConflictException('未找到目标项目');
         }
 
         // verify that the no mission with the same name exists in the project
@@ -431,7 +431,7 @@ export class MissionService {
         });
         if (exists) {
             throw new ConflictException(
-                'Mission with that name already exists in the project',
+                '该项目中已存在同名任务',
             );
         }
 
@@ -463,7 +463,7 @@ export class MissionService {
 
         if (mission.files.length > 0) {
             throw new ConflictException(
-                'Mission cannot be deleted because it contains files',
+                '无法删除任务，因为其包含文件',
             );
         }
         await this.missionRepository.softRemove(mission);
@@ -536,7 +536,7 @@ export class MissionService {
         });
         if (exists) {
             throw new ConflictException(
-                'Mission with that name already exists',
+                '已存在同名任务',
             );
         }
         await this.missionRepository.update(uuid, {

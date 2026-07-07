@@ -18,7 +18,7 @@ from kleinkram.printing import print_file_verification_status
 logger = logging.getLogger(__name__)
 
 HELP = """\
-Verify if files were uploaded correctly.
+验证文件是否上传正确。
 """
 
 verify_typer = typer.Typer(name="verify", invoke_without_command=True, help=HELP)
@@ -44,24 +44,24 @@ def _handle_no_files_to_process(original_count: int, processed_count: int, actio
 
 @verify_typer.callback()
 def verify(
-    files: List[str] = typer.Argument(help="files to verify"),
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="project id or name"),
-    mission: str = typer.Option(..., "--mission", "-m", help="mission id or name"),
+    files: List[str] = typer.Argument(help="要验证的文件"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称"),
+    mission: str = typer.Option(..., "--mission", "-m", help="任务 ID 或名称"),
     skip: bool = typer.Option(
         False,
         "--skip",
         "-s",
-        help="skip unsupported file types, badly named files, or directories instead of erroring",
+        help="跳过不支持的文件类型、命名错误的文件或目录（而不是报错）",
     ),
-    experimental_datatypes: bool = typer.Option(False, help="allow experimental datatypes (yaml, svo2, db3, tum)"),
-    skip_hash: bool = typer.Option(None, help="skip hash check"),
+    experimental_datatypes: bool = typer.Option(False, help="允许实验性数据类型（yaml, svo2, db3, tum）"),
+    skip_hash: bool = typer.Option(None, help="跳过哈希检查"),
     check_file_hash: bool = typer.Option(
         True,
-        help="check file hash. If True, file names and file hashes are checked.",
+        help="检查文件哈希。如果为 True，则检查文件名和文件哈希。",
     ),
     check_file_size: bool = typer.Option(
         True,
-        help="check file size. If True, file names and file sizes are checked.",
+        help="检查文件大小。如果为 True，则检查文件名和文件大小。",
     ),
 ) -> None:
     # get all filepaths

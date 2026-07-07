@@ -49,7 +49,7 @@ def authorize():
     if user_id:
         user = next((u for u in FAKE_USERS if u["id"] == user_id), None)
         if not user:
-            return f"User with ID {user_id} not found. Available user IDs: 1, 2, 3", 400
+            return f"未找到 ID 为 {user_id} 的用户。可用用户 ID：1, 2, 3", 400
 
         # Generate auth code and redirect immediately
         fake_auth_code = f"fake-auth-code-{user['id']}"
@@ -74,7 +74,7 @@ def login():
 
     user = next((u for u in FAKE_USERS if u["id"] == user_id), None)
     if not user:
-        return "User not found", 400
+        return "未找到用户", 400
 
     fake_auth_code = f"fake-auth-code-{user['id']}"
     print(f"Generated fake auth code: {fake_auth_code} for user: {user['email']}")
@@ -96,11 +96,11 @@ def token():
     try:
         user_id = auth_code.replace("fake-auth-code-", "")
     except ValueError:
-        return "Invalid authorization code", 400
+        return "无效的授权码", 400
 
     user = next((u for u in FAKE_USERS if u["id"] == user_id), None)
     if not user:
-        return "Invalid user", 400
+        return "无效用户", 400
 
     # Generate a fake access token and store it
     access_token = f"fake-token-{user['id']}"
@@ -120,13 +120,13 @@ def profile():
     """Returns the user profile based on the access token"""
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
-        return jsonify({"error": "Missing or invalid authorization header"}), 401
+        return jsonify({"error": "缺少或无效的授权头"}), 401
 
     access_token = auth_header.split(" ")[1]
     user = ACTIVE_TOKENS.get(access_token)
 
     if not user:
-        return jsonify({"error": "Invalid or expired token"}), 401
+        return jsonify({"error": "无效或已过期的令牌"}), 401
 
     return jsonify(user)
 

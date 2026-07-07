@@ -172,19 +172,19 @@ const createFile = async (): Promise<void> => {
         if (success) {
             quasar.notify({
                 message:
-                    'Google Drive upload started. check the progress in the Upload page.',
+                    'Google Drive 上传已开始。请在上传页面查看进度。',
                 color: 'positive',
                 timeout: 0,
                 actions: [
                     {
-                        label: 'Go to Uploads',
+                        label: '前往上传页面',
                         color: 'white',
                         handler: () => {
                             void router.push('/upload');
                         },
                     },
                     {
-                        label: 'Dismiss',
+                        label: '关闭',
                         color: 'white',
                         handler: () => {
                             /* dismiss */

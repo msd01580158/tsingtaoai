@@ -5,7 +5,7 @@
             key="menu"
             no-caps
             class="q-py-none q-px-sm q-mx-sm text-secondary"
-            label="Menu"
+            label="菜单"
             icon="sym_o_menu"
         >
             <q-menu auto-close style="width: 280px">

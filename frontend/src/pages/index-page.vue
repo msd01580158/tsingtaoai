@@ -3,7 +3,7 @@
         <div class="q-pa-lg">
             <div class="text-h3 text-center">Kleinkram</div>
             <div class="text-h5 text-center">
-                A web-based tool for managing ROS bags
+                一个基于 Web 的 ROS 数据包管理工具
             </div>
             <q-img src="/rsl.png" class="q-mt-md" />
         </div>

@@ -5,7 +5,7 @@
             style="text-decoration: none"
             href="https://uptime.leggedrobotics.com/status/kleinkram"
         >
-            Statuspage</a
+            状态页面</a
         >
     </span>
 </template>

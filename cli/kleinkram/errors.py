@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-LOGIN_MESSAGE = "Please login using `klein login`."
-UPDATE_MESSAGE = "Please update your CLI using `pip install --upgrade kleinkram`."
+LOGIN_MESSAGE = "请使用 `klein login` 登录。"
+UPDATE_MESSAGE = "请使用 `pip install --upgrade kleinkram` 更新 CLI。"
 
 
 class ParsingError(Exception): ...

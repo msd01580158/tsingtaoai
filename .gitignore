@@ -21,3 +21,5 @@ packages/*/dist/
 docs/development/api/generated/
 docs/development/application-structure/postgres.md
 docs/development/application-structure/postgres.md
+.claude/
+.zread/

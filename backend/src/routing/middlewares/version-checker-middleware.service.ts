@@ -78,7 +78,7 @@ export class VersionCheckerMiddlewareService implements NestMiddleware {
         throw new HttpException(
             {
                 statusCode: 426,
-                message: `Client version ${clientVersion} is not supported. Please upgrade to at least version ${appVersion}.`,
+                message: `客户端版本 ${clientVersion} 不受支持。请升级至 ${appVersion} 或更高版本。`,
                 error: 'Upgrade Required',
             },
             426, // HTTP 426 Upgrade Required

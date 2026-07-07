@@ -1,7 +1,7 @@
 <template>
     <q-tabs>
         <q-route-tab v-if="!user" :to="ROUTES.LOGIN.path">
-            Sign in
+            登录
         </q-route-tab>
 
         <div v-else class="flex row justify-end" style="height: 56px">
@@ -9,7 +9,7 @@
 
             <div style="margin: auto 10px auto 30px" @click="showOverlay">
                 <q-btn round flat color="grey-8" icon="sym_o_export_notes">
-                    <q-tooltip>Processing Uploads</q-tooltip>
+                    <q-tooltip>上传处理中</q-tooltip>
                     <q-linear-progress
                         v-if="isUploading"
                         indeterminate
@@ -32,7 +32,7 @@
                             >
                                 <q-item style="padding-bottom: 0">
                                     <q-item-section>
-                                        <b>File Upload</b>
+                                        <b>文件上传</b>
                                     </q-item-section>
                                 </q-item>
                             </q-card-section>
@@ -60,8 +60,7 @@
                             <q-card-section class="q-py-xs">
                                 <q-item>
                                     <q-item-section>
-                                        Don't close this tab while files are
-                                        uploading
+                                        上传文件时请不要关闭此标签页
                                     </q-item-section>
                                 </q-item>
                                 <q-item
@@ -88,7 +87,7 @@
                                                     )
                                                 }}%
                                             </p>
-                                            <i v-else> Upload Canceled </i>
+                                            <i v-else> 上传已取消 </i>
                                         </q-item-section>
                                     </div>
                                 </q-item>
@@ -97,12 +96,12 @@
                                     <q-item>
                                         <q-item-section>
                                             <span
-                                                >And
+                                                >以及
                                                 {{
                                                     uploadsWithoutCompleted.length -
                                                     5
                                                 }}
-                                                more</span
+                                                更多</span
                                             >
                                         </q-item-section>
                                     </q-item>
@@ -123,7 +122,7 @@
                                     style="margin: 8px auto; width: 200px"
                                     class="button-border"
                                     color="black"
-                                    label="Open Pending Uploads"
+                                    label="查看待上传文件"
                                     :to="ROUTES.UPLOAD.path"
                                     @click="hideOverlay"
                                 />
@@ -226,12 +225,12 @@ const averageUploadSpeed = computed(() => {
 });
 const timeEstimated = computed(() => {
     const remainingSize = totalToUpload.value - totalUploaded.value;
-    if (remainingSize === 0) return '0 min';
-    if (averageUploadSpeed.value === 0) return 'Calculating...';
+    if (remainingSize === 0) return '0 分钟';
+    if (averageUploadSpeed.value === 0) return '计算中...';
     const remainingTime = remainingSize / averageUploadSpeed.value;
-    if (Number.isNaN(remainingTime)) return 'Calculating...';
+    if (Number.isNaN(remainingTime)) return '计算中...';
     const ave = Math.round(remainingTime / 60);
-    return `${ave.toString()} min`;
+    return `${ave.toString()} 分钟`;
 });
 
 const isOverlayVisible = ref(false);

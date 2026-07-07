@@ -18,10 +18,10 @@ from kleinkram.utils import is_valid_uuid4
 from kleinkram.utils import split_args
 
 HELP = """\
-Launch kleinkram actions from predefined templates.
+从预定义模板启动 Kleinkram 执行。
 
-You can list available action templates, launch new actions on specific missions, and optionally
-follow their logs in real-time.
+您可以列出可用执行模板，在特定任务上启动新的执行，并可选择
+实时跟踪其日志。
 """
 
 action_typer = typer.Typer(
@@ -30,9 +30,9 @@ action_typer = typer.Typer(
     help=HELP,
 )
 
-LIST_HELP = "Lists action templates (definitions). To list individual runs, use `klein run list`."
-GET_HELP = "Get details for a specific action template."
-RUN_HELP = "Launch a new action from a template."
+LIST_HELP = "列出执行模板（定义）。要列出单个运行记录，请使用 `klein run list`。"
+GET_HELP = "获取指定执行模板的详细信息。"
+RUN_HELP = "从模板启动新的执行。"
 
 
 @action_typer.command(help=LIST_HELP, name="list")
@@ -41,7 +41,7 @@ def list_actions() -> None:
     templates = list(kleinkram.api.routes.get_action_templates(client))
 
     if not templates:
-        typer.echo("No action templates found.")
+        typer.echo("未找到执行模板。")
         return
 
     print_action_templates_table(templates, pprint=get_shared_state().verbose)
@@ -49,10 +49,10 @@ def list_actions() -> None:
 
 @action_typer.command(help=RUN_HELP)
 def run(
-    template_name: str = typer.Argument(..., help="Name or ID of the template to run."),
-    mission: str = typer.Option(..., "--mission", "-m", help="Mission ID or name to run the action on."),
-    project: Optional[str] = typer.Option(None, "--project", "-p", help="Project ID or name (to scope mission)."),
-    follow: bool = typer.Option(False, "--follow", "-f", help="Follow the logs of the action run."),
+    template_name: str = typer.Argument(..., help="要运行的模板名称或 ID。"),
+    mission: str = typer.Option(..., "--mission", "-m", help="要运行执行的任务 ID 或名称。"),
+    project: Optional[str] = typer.Option(None, "--project", "-p", help="项目 ID 或名称（用于限定任务范围）。"),
+    follow: bool = typer.Option(False, "--follow", "-f", help="跟踪执行运行的日志。"),
 ) -> None:
     """
     Submits an action to run on a specific mission and optionally follows its logs.
@@ -73,16 +73,16 @@ def run(
         mission_obj = kleinkram.api.routes.get_mission(client, mission_query)
         mission_uuid = mission_obj.id
     except kleinkram.errors.MissionNotFound:
-        typer.secho(f"Error: Mission '{mission}' not found.", fg=typer.colors.RED)
+        typer.secho(f"错误：未找到任务 '{mission}'。", fg=typer.colors.RED)
         raise typer.Exit(code=1)
     except kleinkram.errors.InvalidMissionQuery:
         typer.secho(
-            "Error: Mission query is ambiguous. Try specifying a project with -p.",
+            "错误：任务查询不明确，请尝试使用 -p 指定项目。",
             fg=typer.colors.RED,
         )
         raise typer.Exit(code=1)
     except Exception as e:
-        typer.secho(f"Error resolving mission: {e}", fg=typer.colors.RED)
+        typer.secho(f"解析任务时出错：{e}", fg=typer.colors.RED)
         raise typer.Exit(code=1)
 
     # 2. Resolve Template to UUID
@@ -95,24 +95,24 @@ def run(
 
             if not found_template:
                 typer.secho(
-                    f"Error: Action template '{template_name}' not found.",
+                    f"错误：未找到执行模板 '{template_name}'。",
                     fg=typer.colors.RED,
                 )
                 raise typer.Exit(code=1)
             template_uuid = found_template.uuid
     except Exception as e:
-        typer.secho(f"Error resolving template: {e}", fg=typer.colors.RED)
+        typer.secho(f"解析模板时出错：{e}", fg=typer.colors.RED)
         raise typer.Exit(code=1)
 
     try:
         action_uuid_str = kleinkram.api.routes.submit_action(client, mission_uuid, template_uuid)
-        typer.secho(f"Action submitted. Run ID: {action_uuid_str}", fg=typer.colors.GREEN)
+        typer.secho(f"执行已提交，运行 ID：{action_uuid_str}", fg=typer.colors.GREEN)
 
     except httpx.HTTPStatusError as e:
-        typer.secho(f"Error submitting action: {e.response.text}", fg=typer.colors.RED)
+        typer.secho(f"提交执行时出错：{e.response.text}", fg=typer.colors.RED)
         raise typer.Exit(code=1)
     except (KeyError, Exception) as e:
-        typer.secho(f"An unexpected error occurred: {e}", fg=typer.colors.RED)
+        typer.secho(f"发生意外错误：{e}", fg=typer.colors.RED)
         raise typer.Exit(code=1)
 
     if follow:

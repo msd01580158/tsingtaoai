@@ -84,15 +84,15 @@ class FileValidator:
     def _raise_with_skip_hint(self, e: Exception) -> None:
         """Re-raises a validation error with a hint to use --skip."""
         base_message = str(e)
-        hint = "Use --skip to ignore."
+        hint = "使用 --skip 忽略。"
 
         if isinstance(e, IsADirectoryError):
-            hint = "Use --skip to ignore directories."
+            hint = "使用 --skip 忽略目录。"
         elif isinstance(e, DatatypeNotSupported):
             if "Experimental" in base_message:
-                hint = "Use --experimental-datatypes to allow or --skip to ignore."
+                hint = "使用 --experimental-datatypes 允许或 --skip 忽略。"
         elif isinstance(e, FileNameNotSupported):
-            hint = "Use --skip to ignore."  # No --fix-filenames hint here
+            hint = "使用 --skip 忽略。"  # No --fix-filenames hint here
 
         # Raise a new exception to the same type to preserve the error type
         raise type(e)(f"{base_message}. {hint}")
@@ -107,18 +107,18 @@ def _report_skipped_files(skipped_files: List[tuple[Path, str]]) -> None:
             # Full report
             typer.echo(
                 typer.style(
-                    f"--- Skipped {len(skipped_files)} path(s) ---",
+                    f"--- 已跳过 {len(skipped_files)} 个路径 ---",
                     fg=typer.colors.YELLOW,
                 )
             )
             for file, reason in skipped_files:
-                typer.echo(f"Skipped: {file} (Reason: {reason})")
+                typer.echo(f"已跳过：{file}（原因：{reason}）")
             typer.echo("---------------------------\n")
         else:
             # Summary report
             typer.echo(
                 typer.style(
-                    f"Skipped {len(skipped_files)} path(s) due to errors. Use `klein --debug [...]` for details.",
+                    f"因错误跳过 {len(skipped_files)} 个路径，使用 `klein --debug [...]` 查看详情。",
                     fg=typer.colors.YELLOW,
                 )
             )

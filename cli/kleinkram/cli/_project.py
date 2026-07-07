@@ -17,19 +17,19 @@ project_typer = typer.Typer(no_args_is_help=True, context_settings={"help_option
 
 
 NOT_IMPLEMENTED_YET = """\
-Not implemented yet, open an issue if you want specific functionality
+尚未实现，如有特定功能需求请提交 Issue
 """
 
-CREATE_HELP = "create a project"
-INFO_HELP = "get information about a project"
-UPDATE_HELP = "update a project"
-DELETE_HELP = "delete a project"
+CREATE_HELP = "创建项目"
+INFO_HELP = "获取项目信息"
+UPDATE_HELP = "更新项目"
+DELETE_HELP = "删除项目"
 
 
 @project_typer.command(help=CREATE_HELP)
 def create(
-    project: str = typer.Option(..., "--project", "-p", help="project name"),
-    description: str = typer.Option(..., "--description", "-d", help="project description"),
+    project: str = typer.Option(..., "--project", "-p", help="项目名称"),
+    description: str = typer.Option(..., "--description", "-d", help="项目描述"),
 ) -> None:
     client = AuthenticatedClient()
     project_id = kleinkram.api.routes._create_project(client, project, description)
@@ -39,7 +39,7 @@ def create(
 
 
 @project_typer.command(help=INFO_HELP)
-def info(project: str = typer.Option(..., "--project", "-p", help="project id or name")) -> None:
+def info(project: str = typer.Option(..., "--project", "-p", help="项目 ID 或名称")) -> None:
     project_ids, project_patterns = split_args([project])
     project_query = ProjectQuery(ids=project_ids, patterns=project_patterns)
 
@@ -50,12 +50,12 @@ def info(project: str = typer.Option(..., "--project", "-p", help="project id or
 
 @project_typer.command(help=UPDATE_HELP)
 def update(
-    project: str = typer.Option(..., "--project", "-p", help="project id or name"),
-    description: Optional[str] = typer.Option(None, "--description", "-d", help="project description"),
-    new_name: Optional[str] = typer.Option(None, "--new-name", "-n", "--name", help="new project name"),
+    project: str = typer.Option(..., "--project", "-p", help="项目 ID 或名称"),
+    description: Optional[str] = typer.Option(None, "--description", "-d", help="项目描述"),
+    new_name: Optional[str] = typer.Option(None, "--new-name", "-n", "--name", help="新项目名称"),
 ) -> None:
     if description is None and new_name is None:
-        raise typer.BadParameter("nothing to update, provide --description or --new-name")
+        raise typer.BadParameter("没有需要更新的内容，请提供 --description 或 --new-name")
 
     project_ids, project_patterns = split_args([project])
     project_query = ProjectQuery(ids=project_ids, patterns=project_patterns)
@@ -69,7 +69,7 @@ def update(
 
 
 @project_typer.command(help=DELETE_HELP)
-def delete(project: str = typer.Option(..., "--project", "-p", help="project id or name")) -> None:
+def delete(project: str = typer.Option(..., "--project", "-p", help="项目 ID 或名称")) -> None:
     project_ids, project_patterns = split_args([project])
     project_query = ProjectQuery(ids=project_ids, patterns=project_patterns)
 

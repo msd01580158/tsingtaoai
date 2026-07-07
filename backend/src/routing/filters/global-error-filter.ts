@@ -35,7 +35,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
         if (exception.name === 'InvalidJwtTokenException') {
             response.status(401).json({
                 statusCode: 401,
-                message: 'Invalid JWT token. Are you logged in?',
+                message: '无效的 JWT 令牌。您是否已登录？',
             });
             return;
         }
@@ -78,7 +78,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
                 .status(302)
                 .redirect(
                     `${env.FRONTEND_URL}/login?error_state=auth_flow_failed&error_msg=${encodeURIComponent(
-                        'Failed to obtain access token. Please try again.',
+                        '获取访问令牌失败，请重试。',
                     )}`,
                 );
 
@@ -148,7 +148,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
         if (exception instanceof EntityNotFoundError) {
             response.status(400).json({
                 statusCode: 400,
-                message: 'Bad Request',
+                message: '请求错误',
             });
             return;
         }
@@ -164,7 +164,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
         if (exception.name === 'PayloadTooLargeError') {
             response.status(413).json({
                 statusCode: 413,
-                message: 'Payload too large',
+                message: '请求体过大',
             });
             return;
         }
@@ -175,7 +175,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
         ) {
             response.status(400).json({
                 statusCode: 400,
-                message: 'Invalid UUID',
+                message: '无效的 UUID',
             });
             return;
         }
@@ -189,7 +189,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
 
         response.status(500).json({
             statusCode: 500,
-            message: 'Internal server error',
+            message: '服务器内部错误',
         });
     }
 }
