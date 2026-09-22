@@ -1,4 +1,4 @@
-# ZhiLian · Embodied Data Engineering Platform
+# embodatahub · Embodied Data Engineering Platform
 
 **From raw capture to trained policy — one pipeline, end to end.**
 
@@ -38,7 +38,7 @@ The model underperforms — is it the algorithm or the data? Without visualizati
 
 ## The Answer: Let the Platform Decide Whether Data Is Usable
 
-ZhiLian is a **data engineering foundation for embodied AI**. It takes the data-governance work scattered across file shares, ad-hoc scripts, and tribal knowledge, and pulls it into a single standardized, reproducible, auditable automated pipeline.
+embodatahub is a **data engineering foundation for embodied AI**. It takes the data-governance work scattered across file shares, ad-hoc scripts, and tribal knowledge, and pulls it into a single standardized, reproducible, auditable automated pipeline.
 
 **See it.** Multi-view video, joint curves, gripper open/close, and 3D trajectories replayed in sync — what your data looks like, at a glance.
 
@@ -116,7 +116,7 @@ Six health checks: task description, camera naming conventions, resolution consi
 
 Numerical detection can find anomalies in curves, but it cannot read what is happening in a frame. Was the robot *placing a block into a box*, or just *waving its arm in circles*? That requires something that can actually understand the image.
 
-ZhiLian integrates VLMs into the QC loop: it automatically extracts key frames from each episode, sends them to a vision-language model to judge task success, and returns both a confidence score and a rationale. Failed grasps, dropped objects, incomplete motions — nothing slips through.
+embodatahub integrates VLMs into the QC loop: it automatically extracts key frames from each episode, sends them to a vision-language model to judge task success, and returns both a confidence score and a rationale. Failed grasps, dropped objects, incomplete motions — nothing slips through.
 
 **Three integration paths supported**
 
@@ -244,7 +244,7 @@ From a raw recording file to a dataset you can feed straight into a policy netwo
 
 **Bilingual interface** — Chinese / English switching, with preferences persisted locally. Collaboration across domestic and international teams is friction-free.
 
-> Tools solve point problems. Platforms solve collaboration problems. ZhiLian's goal is to let an entire team work around one shared, trustworthy body of data.
+> Tools solve point problems. Platforms solve collaboration problems. embodatahub's goal is to let an entire team work around one shared, trustworthy body of data.
 
 ---
 
@@ -370,9 +370,9 @@ From a raw recording file to a dataset you can feed straight into a policy netwo
 
 ---
 
-## Why ZhiLian: The Case for Replacing "File Share + Hand-Written Scripts"
+## Why embodatahub: The Case for Replacing "File Share + Hand-Written Scripts"
 
-| Dimension | The traditional way | ZhiLian |
+| Dimension | The traditional way | embodatahub |
 |---|---|---|
 | **Data organization** | Whole files, remembered by people, found by browsing directories | Four-tier model: Project → Mission → Episode → Streams |
 | **Quality judgment** | A human plays back every video and judges by experience | Seven filters auto-score + VLM semantic evaluation |
@@ -449,4 +449,4 @@ Ningbo, Zhejiang, China
 
 ---
 
-*ZhiLian (智炼) · Embodied Data Engineering Platform — Forge Robotic Intelligence*
+*embodatahub · Embodied Data Engineering Platform — Forge Robotic Intelligence*
