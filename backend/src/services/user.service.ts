@@ -10,20 +10,20 @@ import {
     PermissionsDto,
     UserDto,
     UsersDto,
-} from '@kleinkram/api-dto';
-import { SortOrder } from '@kleinkram/api-dto/types/pagination';
+} from '@rslstudio/api-dto';
+import { SortOrder } from '@rslstudio/api-dto/types/pagination';
 import {
     ApiKeyEntity,
     MissionAccessViewEntity,
     ProjectAccessViewEntity,
     UserEntity,
-} from '@kleinkram/backend-common';
-import { systemUser } from '@kleinkram/backend-common/consts';
+} from '@rslstudio/backend-common';
+import { systemUser } from '@rslstudio/backend-common/consts';
 import {
     AccessGroupRights,
     AccessGroupType,
     UserRole,
-} from '@kleinkram/shared';
+} from '@rslstudio/shared';
 import { ForbiddenException, Injectable, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsRelations, FindOptionsSelect, Repository } from 'typeorm';

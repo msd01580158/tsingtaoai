@@ -1,13 +1,15 @@
 import { OutputDto } from '@/decorators';
 import { AuthService } from '@/services/auth.service';
 import { UserService } from '@/services/user.service';
-import { AvailableProvidersDto } from '@kleinkram/api-dto';
-import { UserEntity } from '@kleinkram/backend-common/entities/user/user.entity';
-import env from '@kleinkram/backend-common/environment';
-import { CookieNames, Providers } from '@kleinkram/shared';
+import { AvailableProvidersDto, LoginDto, RegisterDto } from '@rslstudio/api-dto';
+import { UserEntity } from '@rslstudio/backend-common/entities/user/user.entity';
+import env from '@rslstudio/backend-common/environment';
+import { CookieNames, Providers } from '@rslstudio/shared';
 import {
+    Body,
     Controller,
     Get,
+    HttpCode,
     MethodNotAllowedException,
     Post,
     Req,
@@ -18,6 +20,7 @@ import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 import { Request, Response } from 'express';
 import { InvalidJwtTokenException } from './jwt.strategy';
+import { LocalAuthService } from './local.strategy';
 import { UserOnly } from './roles.decorator';
 
 @Controller('auth')
@@ -26,6 +29,7 @@ export class AuthController {
         private authService: AuthService,
         private readonly jwtService: JwtService,
         private userService: UserService,
+        private localAuthService: LocalAuthService,
     ) {}
 
     @Get('available-providers')
@@ -35,6 +39,7 @@ export class AuthController {
             google: !!env.GOOGLE_CLIENT_ID && !!env.GOOGLE_CLIENT_SECRET,
             github: !!env.GITHUB_CLIENT_ID && !!env.GITHUB_CLIENT_SECRET,
             fakeOauth: env.VITE_USE_FAKE_OAUTH_FOR_DEVELOPMENT,
+            local: true,
         };
     }
 
@@ -92,6 +97,69 @@ export class AuthController {
         if (!env.VITE_USE_FAKE_OAUTH_FOR_DEVELOPMENT)
             throw new MethodNotAllowedException();
         this.handleAuthRedirect(request, response);
+    }
+
+    @Post('login')
+    @HttpCode(200)
+    @OutputDto(null)
+    async loginLocal(
+        @Body() loginDto: LoginDto,
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<{ message: string }> {
+        const user = await this.localAuthService.validateUser(
+            loginDto.email,
+            loginDto.password,
+        );
+        const tokens = this.authService.login(user);
+
+        response.cookie(CookieNames.AUTH_TOKEN, tokens[CookieNames.AUTH_TOKEN], {
+            httpOnly: false,
+            secure: false,
+            sameSite: 'lax',
+        });
+        response.cookie(
+            CookieNames.REFRESH_TOKEN,
+            tokens[CookieNames.REFRESH_TOKEN],
+            {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+            },
+        );
+        return { message: '登录成功' };
+    }
+
+    @Post('register')
+    @HttpCode(201)
+    @OutputDto(null)
+    async registerLocal(
+        @Body() registerDto: RegisterDto,
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<{ message: string }> {
+        const user = await this.authService.registerLocal(
+            registerDto.name,
+            registerDto.email,
+            registerDto.password,
+        );
+        const tokens = this.authService.login(user);
+
+        response.cookie(CookieNames.AUTH_TOKEN, tokens[CookieNames.AUTH_TOKEN], {
+            httpOnly: false,
+            secure: false,
+            sameSite: 'lax',
+        });
+        response.cookie(
+            CookieNames.REFRESH_TOKEN,
+            tokens[CookieNames.REFRESH_TOKEN],
+            {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'lax',
+                maxAge: 30 * 24 * 60 * 60 * 1000,
+            },
+        );
+        return { message: '注册成功' };
     }
 
     private handleAuthRedirect(
@@ -167,20 +235,24 @@ export class AuthController {
 
         response.cookie(CookieNames.AUTH_TOKEN, token[CookieNames.AUTH_TOKEN], {
             httpOnly: false,
-            secure: env.DEV,
-            sameSite: 'strict',
+            secure: false,
+            sameSite: 'lax',
         });
         response.cookie(
             CookieNames.REFRESH_TOKEN,
             token[CookieNames.REFRESH_TOKEN],
             {
                 httpOnly: true,
-                secure: env.DEV,
-                sameSite: 'strict',
+                secure: false,
+                sameSite: 'lax',
                 maxAge: 30 * 24 * 60 * 60 * 1000,
             },
         );
-        response.redirect(`${env.FRONTEND_URL}/landing`);
+        // 根据请求 Host 动态确定前端地址，兼容远程 IP/域名访问
+        const host = request.get('host') || `localhost:${env.FRONTEND_URL?.split(':').pop() || '8003'}`;
+        const proto = request.get('x-forwarded-proto') || 'http';
+        const frontendBase = `${proto}://${host}`;
+        response.redirect(`${frontendBase}/landing`);
     }
 
     @Get('validate-token')
@@ -228,7 +300,7 @@ export class AuthController {
             );
             response.cookie(CookieNames.AUTH_TOKEN, newAuthToken, {
                 httpOnly: false,
-                secure: env.DEV,
+                secure: false,
                 sameSite: 'strict',
             });
             return response.status(200).json({ message: '令牌已刷新' });

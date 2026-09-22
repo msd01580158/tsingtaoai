@@ -11,6 +11,8 @@
                     </span>
                     <footer-separator />
                     <footer-build-info />
+                    <footer-separator />
+                    <footer-github-link />
                 </div>
                 <footer-status-page-link />
             </q-toolbar>
@@ -20,6 +22,7 @@
 
 <script setup lang="ts">
 import FooterBuildInfo from './footer-build-info.vue';
+import FooterGithubLink from './footer-github-link.vue';
 import FooterSeparator from './footer-separator.vue';
 import FooterStatusPageLink from './footer-status-page-link.vue';
 

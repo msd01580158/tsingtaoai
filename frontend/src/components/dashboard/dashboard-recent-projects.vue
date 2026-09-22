@@ -97,7 +97,7 @@
 import {
     ResentProjectDto,
     ResentProjectsDto,
-} from '@kleinkram/api-dto/types/project/recent-projects.dto';
+} from '@rslstudio/api-dto/types/project/recent-projects.dto';
 import { useQuery } from '@tanstack/vue-query';
 import { formatDistanceToNow } from 'date-fns';
 import { recentProjects } from 'src/services/queries/project';

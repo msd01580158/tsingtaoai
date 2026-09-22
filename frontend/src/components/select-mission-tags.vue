@@ -142,8 +142,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TagTypeDto } from '@kleinkram/api-dto/types/tags/tags.dto';
-import { DataType } from '@kleinkram/shared';
+import type { TagTypeDto } from '@rslstudio/api-dto/types/tags/tags.dto';
+import { DataType } from '@rslstudio/shared';
 import { useAllTags, useProjectQuery } from 'src/hooks/query-hooks';
 import { icon } from 'src/services/generic';
 import { computed, Ref, ref, watch } from 'vue';

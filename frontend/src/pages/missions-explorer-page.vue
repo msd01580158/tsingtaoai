@@ -9,6 +9,16 @@
 
             <template #buttons>
                 <button-group>
+                    <q-btn
+                        class="button-border"
+                        flat
+                        style="height: 100%"
+                        color="primary"
+                        icon="sym_o_checklist"
+                        :label="$t('project.datasets')"
+                        @click="navigateToDatasets"
+                    />
+
                     <ConfigureTagsDialogOpener
                         v-if="projectUuid"
                         :project-uuid="projectUuid"
@@ -233,7 +243,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { FlatMissionDto } from '@kleinkram/api-dto/types/mission/mission.dto';
+import type { FlatMissionDto } from '@rslstudio/api-dto/types/mission/mission.dto';
 import { useQueryClient } from '@tanstack/vue-query';
 import ActionConfiguration from 'components/actions/action-configuration.vue';
 import DeleteProjectDialogOpener from 'components/button-wrapper/delete-project-dialog-opener.vue';
@@ -258,16 +268,26 @@ import {
     useProjectQuery,
 } from 'src/hooks/query-hooks';
 import { useProjectUUID } from 'src/hooks/router-hooks';
+import { useRouter } from 'vue-router';
+import ROUTES from 'src/router/routes';
 import { computed, ref, Ref } from 'vue';
 
 const queryClient = useQueryClient();
 const handler = useHandler();
 const $q = useQuasar();
+const $router = useRouter();
 const projectUuid = useProjectUUID();
 const { data: project, isLoadingError, error } = useProjectQuery(projectUuid);
 const createAction = ref(false);
 
 registerNoPermissionErrorHandler(isLoadingError, projectUuid, 'project', error);
+
+const navigateToDatasets = (): void => {
+    void $router.push({
+        name: ROUTES.PROJECT_DATASETS.routeName,
+        params: { projectUuid: projectUuid.value },
+    });
+};
 
 const onClose = (): void => {
     createAction.value = false;

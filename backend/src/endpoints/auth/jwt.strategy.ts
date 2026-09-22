@@ -1,5 +1,5 @@
-import env from '@kleinkram/backend-common/environment';
-import { CookieNames } from '@kleinkram/shared';
+import env from '@rslstudio/backend-common/environment';
+import { CookieNames } from '@rslstudio/shared';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';

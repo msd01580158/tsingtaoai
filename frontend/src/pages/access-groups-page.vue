@@ -162,10 +162,10 @@ import { useQuery } from '@tanstack/vue-query';
 import { formatDate, isExpired } from 'src/services/date-formating';
 import { computed, Ref, ref, watch } from 'vue';
 
-import type { AccessGroupDto } from '@kleinkram/api-dto/types/access-control/access-group.dto';
-import type { AccessGroupsDto } from '@kleinkram/api-dto/types/access-control/access-groups.dto';
-import type { ProjectWithMissionsDto } from '@kleinkram/api-dto/types/project/project-with-missions.dto';
-import { AccessGroupType } from '@kleinkram/shared';
+import type { AccessGroupDto } from '@rslstudio/api-dto/types/access-control/access-group.dto';
+import type { AccessGroupsDto } from '@rslstudio/api-dto/types/access-control/access-groups.dto';
+import type { ProjectWithMissionsDto } from '@rslstudio/api-dto/types/project/project-with-missions.dto';
+import { AccessGroupType } from '@rslstudio/shared';
 import DeleteAccessGroup from 'components/button-wrapper/delete-access-group.vue';
 import CreateAccessGroupDialogOpener from 'components/button-wrapper/dialog-opener-create-access-group.vue';
 import ButtonGroupOverlay from 'components/buttons/button-group-overlay.vue';

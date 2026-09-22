@@ -1,11 +1,17 @@
 <template>
     <div class="flex flex-center">
         <div class="q-pa-lg">
-            <div class="text-h3 text-center">Kleinkram</div>
+            <div class="text-h3 text-center">RSL Studio</div>
             <div class="text-h5 text-center">
-                一个基于 Web 的 ROS 数据包管理工具
+                具身智能数据管理平台
             </div>
-            <q-img src="/rsl.png" class="q-mt-md" />
+            <q-img src="/logo-horizontal.png" class="q-mt-md" style="max-width: 360px" />
+
+            <!-- i18n test -->
+            <div class="text-center q-mt-lg">
+                <q-btn color="secondary" :label="$t('language.switchLang')" class="q-mr-sm" />
+                <span class="text-h6">{{ $t('header.dashboard') }}</span>
+            </div>
         </div>
     </div>
 </template>

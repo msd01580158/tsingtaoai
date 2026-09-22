@@ -1,6 +1,6 @@
 import { appVersion } from '@/app-version';
 import { AuthFlowException } from '@/types/auth-flow-exception';
-import env from '@kleinkram/backend-common/environment';
+import env from '@rslstudio/backend-common/environment';
 import {
     ArgumentsHost,
     BadRequestException,
@@ -26,8 +26,8 @@ import logger from '../../logger';
 export class GlobalErrorFilter implements ExceptionFilter {
     public catch(exception: Error, host: ArgumentsHost): void {
         const response: Response = host.switchToHttp().getResponse();
-        response.header('kleinkram-version', appVersion);
-        response.header('Access-Control-Expose-Headers', 'kleinkram-version');
+        response.header('rslstudio-version', appVersion);
+        response.header('Access-Control-Expose-Headers', 'rslstudio-version');
 
         //////////////////////////////
         // Errors that don't get logged
@@ -139,7 +139,7 @@ export class GlobalErrorFilter implements ExceptionFilter {
         }
 
         logger.error(
-            `GlobalErrorFilter: ${exception.name} on kleinkram-version ${appVersion} on endpoint ${request.url} with method ${request.method}`,
+            `GlobalErrorFilter: ${exception.name} on rslstudio-version ${appVersion} on endpoint ${request.url} with method ${request.method}`,
         );
         logger.error(exception.message);
         logger.error(exception);

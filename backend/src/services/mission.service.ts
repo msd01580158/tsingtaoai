@@ -15,12 +15,12 @@ import {
     MinimumMissionsDto,
     MissionsDto,
     MissionWithFilesDto,
-} from '@kleinkram/api-dto';
-import { MissionEntity } from '@kleinkram/backend-common/entities/mission/mission.entity';
-import { ProjectEntity } from '@kleinkram/backend-common/entities/project/project.entity';
-import { TagTypeEntity } from '@kleinkram/backend-common/entities/tagType/tag-type.entity';
-import { UserEntity } from '@kleinkram/backend-common/entities/user/user.entity';
-import { UserRole } from '@kleinkram/shared';
+} from '@rslstudio/api-dto';
+import { MissionEntity } from '@rslstudio/backend-common/entities/mission/mission.entity';
+import { ProjectEntity } from '@rslstudio/backend-common/entities/project/project.entity';
+import { TagTypeEntity } from '@rslstudio/backend-common/entities/tagType/tag-type.entity';
+import { UserEntity } from '@rslstudio/backend-common/entities/user/user.entity';
+import { UserRole } from '@rslstudio/shared';
 import { ConflictException, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, Not, Repository } from 'typeorm';
@@ -34,8 +34,8 @@ import {
     addSort,
 } from './utilities';
 
-import { SortOrder } from '@kleinkram/api-dto';
-import { IStorageBucket } from '@kleinkram/backend-common/modules/storage/types';
+import { SortOrder } from '@rslstudio/api-dto';
+import { IStorageBucket } from '@rslstudio/backend-common/modules/storage/types';
 
 const FIND_MANY_SORT_KEYS = {
     missionName: 'mission.name',

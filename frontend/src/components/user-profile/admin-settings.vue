@@ -53,7 +53,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { RecalculateHashesResponseDto } from '@kleinkram/api-dto';
+import type { RecalculateHashesResponseDto } from '@rslstudio/api-dto';
 import { useQuasar } from 'quasar';
 import axios from 'src/api/axios';
 

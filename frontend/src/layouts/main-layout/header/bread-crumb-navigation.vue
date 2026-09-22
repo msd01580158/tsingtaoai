@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { AccessGroupType } from '@kleinkram/shared';
+import { AccessGroupType } from '@rslstudio/shared';
 import { useQuasar } from 'quasar';
 import { useCrumbs } from 'src/hooks/crumbs';
 import {

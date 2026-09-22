@@ -70,8 +70,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ActionDto } from '@kleinkram/api-dto/types/actions/action.dto';
-import { ActionState } from '@kleinkram/shared';
+import type { ActionDto } from '@rslstudio/api-dto/types/actions/action.dto';
+import { ActionState } from '@rslstudio/shared';
 import ActionBadge from 'components/action-badge.vue';
 import { useRunningActions } from 'src/composables/use-actions-queries';
 import ROUTES from 'src/router/routes';

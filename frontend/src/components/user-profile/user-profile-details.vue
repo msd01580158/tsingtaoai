@@ -79,8 +79,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { GroupMembershipDto } from '@kleinkram/api-dto/types/access-control/group-membership.dto';
-import { AccessGroupType } from '@kleinkram/shared';
+import type { GroupMembershipDto } from '@rslstudio/api-dto/types/access-control/group-membership.dto';
+import { AccessGroupType } from '@rslstudio/shared';
 import { useUser } from 'src/hooks/query-hooks';
 import { computed } from 'vue';
 

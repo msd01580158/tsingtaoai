@@ -10,7 +10,7 @@
             :options="foundUsers?.users ?? []"
             option-label="name"
             class="full-width q-mb-md"
-            label="Search by name or email"
+            label="按姓名或邮箱搜索"
             @input-value="onInputUpdate"
             @update:model-value="onSelectionChange"
         >
@@ -109,7 +109,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import type { UserDto } from '@kleinkram/api-dto/types/user/user.dto';
+import type { UserDto } from '@rslstudio/api-dto/types/user/user.dto';
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
 import { Notify } from 'quasar';
 import { useUserSearch } from 'src/hooks/query-hooks';

@@ -63,7 +63,7 @@
 </template>
 
 <script setup lang="ts">
-import { UserRole } from '@kleinkram/shared';
+import { UserRole } from '@rslstudio/shared';
 import ExplorerPageProjectTable from 'components/explorer-page/explorer-page-project-table.vue';
 import TitleSection from 'components/title-section.vue';
 import AdminSettings from 'components/user-profile/admin-settings.vue';

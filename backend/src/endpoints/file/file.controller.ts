@@ -44,14 +44,14 @@ import {
     TemporaryAccessRequestDto,
     TemporaryFileAccessesDto,
     UpdateFile,
-} from '@kleinkram/api-dto';
+} from '@rslstudio/api-dto';
 import {
     BodyOptionalSource,
     BodyString,
     BodyUUID,
     BodyUUIDArray,
     isValidFileName,
-} from '@kleinkram/validation';
+} from '@rslstudio/validation';
 import {
     BadRequestException,
     Body,
@@ -80,7 +80,7 @@ import {
 } from '../auth/roles.decorator';
 
 import { FoxgloveService } from '@/services/foxglove.service';
-import { FileSource, HealthStatus } from '@kleinkram/shared';
+import { FileSource, HealthStatus } from '@rslstudio/shared';
 
 @Controller(['files'])
 export class FileController {

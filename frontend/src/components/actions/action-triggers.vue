@@ -149,9 +149,9 @@
 </template>
 
 <script setup lang="ts">
-import type { ActionTriggerDto } from '@kleinkram/api-dto/types/actions/action-trigger.dto';
-import type { CurrentAPIUserDto } from '@kleinkram/api-dto/types/user/current-api-user.dto';
-import { TriggerType } from '@kleinkram/shared';
+import type { ActionTriggerDto } from '@rslstudio/api-dto/types/actions/action-trigger.dto';
+import type { CurrentAPIUserDto } from '@rslstudio/api-dto/types/user/current-api-user.dto';
+import { TriggerType } from '@rslstudio/shared';
 import AppCreateButton from 'components/common/app-create-button.vue';
 import AppRefreshButton from 'components/common/app-refresh-button.vue';
 import AppSearchBar from 'components/common/app-search-bar.vue';

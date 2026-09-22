@@ -177,8 +177,8 @@
 </template>
 
 <script setup lang="ts">
-import type { TagDto } from '@kleinkram/api-dto/types/tags/tags.dto';
-import { DataType } from '@kleinkram/shared';
+import type { TagDto } from '@rslstudio/api-dto/types/tags/tags.dto';
+import { DataType } from '@rslstudio/shared';
 import DeleteMissionDialogOpener from 'components/button-wrapper/delete-mission-dialog-opener.vue';
 import EditMissionDialogOpener from 'components/button-wrapper/edit-mission-dialog-opener.vue';
 import MissionMetadataOpener from 'components/button-wrapper/mission-metadata-opener.vue';

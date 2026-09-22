@@ -142,8 +142,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectDto } from '@kleinkram/api-dto/types/project/base-project.dto';
-import { AccessGroupRights } from '@kleinkram/shared';
+import type { ProjectDto } from '@rslstudio/api-dto/types/project/base-project.dto';
+import { AccessGroupRights } from '@rslstudio/shared';
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
 import { Notify, QSelect, QTableColumn } from 'quasar';
 import { accessGroupRightsList } from 'src/enums/access-group-rights-list';

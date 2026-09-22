@@ -289,7 +289,7 @@
                 Audit log help to understand which elements are being accessed
                 by the action. This is useful for debugging and security
                 purposes. In the following we list all endpoints called by the
-                kleinkram CLI during the execution of the action.
+                RSL Studio CLI during the execution of the action.
             </p>
 
             <FileHistory

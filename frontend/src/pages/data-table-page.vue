@@ -98,8 +98,8 @@
 </template>
 
 <script setup lang="ts">
-import type { FileWithTopicDto } from '@kleinkram/api-dto/types/file/file.dto';
-import type { FilesDto } from '@kleinkram/api-dto/types/file/files.dto';
+import type { FileWithTopicDto } from '@rslstudio/api-dto/types/file/file.dto';
+import type { FilesDto } from '@rslstudio/api-dto/types/file/files.dto';
 import {
     keepPreviousData,
     useQuery,

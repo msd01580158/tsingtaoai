@@ -1,10 +1,10 @@
-import type { FileWithTopicDto } from '@kleinkram/api-dto/types/file/file.dto';
-import type { FlatMissionDto } from '@kleinkram/api-dto/types/mission/mission.dto';
+import type { FileWithTopicDto } from '@rslstudio/api-dto/types/file/file.dto';
+import type { FlatMissionDto } from '@rslstudio/api-dto/types/mission/mission.dto';
 import { formatDate } from 'src/services/date-formating';
 import { formatSize } from 'src/services/general-formatting';
 
-import type { ProjectWithAccessRightsDto } from '@kleinkram/api-dto/types/project/project-access.dto';
-import type { ProjectWithMissionCountDto } from '@kleinkram/api-dto/types/project/project-with-mission-count.dto';
+import type { ProjectWithAccessRightsDto } from '@rslstudio/api-dto/types/project/project-access.dto';
+import type { ProjectWithMissionCountDto } from '@rslstudio/api-dto/types/project/project-with-mission-count.dto';
 
 export interface ProjectColumnType {
     name: string;

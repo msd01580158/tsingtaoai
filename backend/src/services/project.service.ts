@@ -8,7 +8,7 @@ import {
     ProjectWithRequiredTagsDto,
     ResentProjectDto,
     SortOrder,
-} from '@kleinkram/api-dto';
+} from '@rslstudio/api-dto';
 import {
     BadRequestException,
     ConflictException,
@@ -40,13 +40,13 @@ import {
     ProjectEntity,
     TagTypeEntity,
     UserEntity,
-} from '@kleinkram/backend-common';
+} from '@rslstudio/backend-common';
 import {
     AccessGroupConfig,
     AccessGroupRights,
     AccessGroupType,
     UserRole,
-} from '@kleinkram/shared';
+} from '@rslstudio/shared';
 import { ConfigService } from '@nestjs/config';
 
 const FIND_MANY_SORT_KEYS = {

@@ -1,5 +1,5 @@
-import type { AvailableProvidersDto } from '@kleinkram/api-dto/types/available-providers.dto';
-import type { CurrentAPIUserDto } from '@kleinkram/api-dto/types/user/current-api-user.dto';
+import type { AvailableProvidersDto } from '@rslstudio/api-dto/types/available-providers.dto';
+import type { CurrentAPIUserDto } from '@rslstudio/api-dto/types/user/current-api-user.dto';
 import axios from 'src/api/axios';
 import { getMe } from 'src/services/queries/user';
 import ENV from '../environment';
@@ -54,6 +54,21 @@ export function logout() {
 
 export const login = (provider: string): void => {
     globalThis.location.href = `${ENV.BACKEND_URL}/auth/${provider}`;
+};
+
+export const loginWithEmail = async (
+    email: string,
+    password: string,
+): Promise<void> => {
+    await axios.post('/auth/login', { email, password });
+};
+
+export const registerWithEmail = async (
+    name: string,
+    email: string,
+    password: string,
+): Promise<void> => {
+    await axios.post('/auth/register', { name, email, password });
 };
 
 export const getAvailableProviders =

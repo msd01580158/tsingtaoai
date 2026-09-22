@@ -13,8 +13,8 @@ import {
     RemoveAccessGroupFromProjectResponseDto,
     RemoveUsersFromAccessGroupDto,
     SetAccessGroupUserExpirationDto,
-} from '@kleinkram/api-dto';
-import { AccessGroupEntity } from '@kleinkram/backend-common';
+} from '@rslstudio/api-dto';
+import { AccessGroupEntity } from '@rslstudio/backend-common';
 import {
     Body,
     Controller,

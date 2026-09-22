@@ -300,11 +300,11 @@
 </template>
 
 <script setup lang="ts">
-import type { ActionTemplateDto } from '@kleinkram/api-dto/types/actions/action-template.dto';
-import type { ActionTriggerDto } from '@kleinkram/api-dto/types/actions/action-trigger.dto';
-import type { CreateActionTriggerDto } from '@kleinkram/api-dto/types/actions/create-action-trigger.dto';
-import type { UpdateActionTriggerDto } from '@kleinkram/api-dto/types/actions/update-action-trigger.dto';
-import { cronToHuman, isValidCron, TriggerType } from '@kleinkram/shared';
+import type { ActionTemplateDto } from '@rslstudio/api-dto/types/actions/action-template.dto';
+import type { ActionTriggerDto } from '@rslstudio/api-dto/types/actions/action-trigger.dto';
+import type { CreateActionTriggerDto } from '@rslstudio/api-dto/types/actions/create-action-trigger.dto';
+import type { UpdateActionTriggerDto } from '@rslstudio/api-dto/types/actions/update-action-trigger.dto';
+import { cronToHuman, isValidCron, TriggerType } from '@rslstudio/shared';
 import ScopeSelector from 'components/common/scope-selector.vue';
 import { QForm, useQuasar } from 'quasar';
 import { ActionService } from 'src/api/services/action.service';

@@ -80,8 +80,8 @@
 </template>
 
 <script setup lang="ts">
-import type { ApiKeyMetadataDto } from '@kleinkram/api-dto/types/user/api-key-metadata.dto';
-import { AccessGroupRights } from '@kleinkram/shared';
+import type { ApiKeyMetadataDto } from '@rslstudio/api-dto/types/user/api-key-metadata.dto';
+import { AccessGroupRights } from '@rslstudio/shared';
 import type { QTableColumn } from 'quasar';
 import { useMyApiKeys } from 'src/hooks/query-hooks';
 import ROUTES from 'src/router/routes';
